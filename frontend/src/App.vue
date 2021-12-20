@@ -4,29 +4,13 @@
 
     <div class="container mt-5">
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" v-for="post in posts" v-bind:key="post._id">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
+            <h5 class="mb-1">{{ post.title }}</h5>
+            <small>{{ post.dateCreated.slice(0, 10) }}</small>
           </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small>Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small class="text-muted">Donec id elit non mi porta.</small>
+          <p class="mb-1">{{ post.content }}</p>
+          <small>Author Name (implementing soon...)</small>
         </a>
       </div>
     </div>
@@ -37,12 +21,24 @@
 
 <script>
 import Navbar from "./components/parts/Navbar.vue"
+import axios from "axios"
 
 export default {
   name: 'App',
   components: {
     Navbar,
-  }
+  },
+  data() {
+    return {
+      posts: [],  
+    }
+  },
+  mounted: function() {
+    axios.get("http://localhost:5050/api/posts/")
+      .then(response => {
+        this.posts = response.data;
+      })
+  } 
 }
 </script>
 
