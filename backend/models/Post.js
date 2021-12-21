@@ -12,6 +12,10 @@ const postSchema = mongoose.Schema({
     dateCreated: {
         type: Date,
         required: true
+    },
+    userId: {
+        type: String,
+        required: true
     }
 })
 

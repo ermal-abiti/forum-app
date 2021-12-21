@@ -23,9 +23,11 @@ export async function getPostById (req, res) {
 }
 
 export async function addPost (req, res) {
+    
     const data = req.body;
 
-    data.dateCreated = new Date().toISOString(); 
+    data.dateCreated = new Date().toISOString();
+    data.userId = req.cookies['userid'];
 
     const newPost = new Post(data);
 
