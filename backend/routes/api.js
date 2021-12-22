@@ -1,4 +1,5 @@
 import { Router } from "express";
+import auth from "../middleware/auth.js";
 import {
     getAllPosts,
     getPostById,
@@ -11,7 +12,7 @@ const router = Router();
 
 // Post Routes
 router.get('/posts', getAllPosts);
-router.post('/addpost', addPost);
+router.post('/addpost', auth, addPost);
 router.get('/post/:postid', getPostById);
 router.put('/post/:postid', updatePost);
 router.delete('/post/:postid', deletePost);
