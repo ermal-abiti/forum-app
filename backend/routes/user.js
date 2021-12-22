@@ -101,10 +101,11 @@ router.get('/loggeduser', async (req, res) => {
         let decoded = jwtDecode(token);
         let user = await User.findOne({username: decoded.username});
 
-        res.status(200).json({
+        return res.status(200).json({
             id: user._id
         });
     }
+    res.send();
 });
 
 router.post('/logout', async (req, res) => {
