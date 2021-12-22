@@ -6,8 +6,7 @@ cnf();
 const config = process.env;
 
 const verifyToken = (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers["x-access-token"] || req.cookies['token'];
+  const token = req.cookies['token'];
 
   if (!token) {
     return res.status(403).send("You need to be authenticated to access this endpoint!");

@@ -86,6 +86,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// temp route
 router.get('/loggedin', (req, res) => {
     if (req.cookies.token) {
         return res.send("User is logged in!");
@@ -93,6 +94,7 @@ router.get('/loggedin', (req, res) => {
     return res.send("No User is logged in")
 });
 
+// temp route
 router.get('/loggeduser', async (req, res) => {
     if (req.cookies['token']) {
         let token = req.cookies['token'];
@@ -103,6 +105,14 @@ router.get('/loggeduser', async (req, res) => {
             id: user._id
         });
     }
+});
+
+router.post('/logout', async (req, res) => {
+    if (req.cookies['token'] && req.cookies['userid']) {
+        return res.clearCookie('token').clearCookie('userid').status(200).send('Logged out successfully!');
+    }
+
+    res.send("No cookies for auth found!");
 });
 
 export default router;

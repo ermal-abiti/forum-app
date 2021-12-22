@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // Post Routes
-router.get('/posts', getAllPosts);
+router.get('/posts', auth, getAllPosts);
 router.post('/addpost', auth, addPost);
 router.get('/post/:postid', getPostById);
 router.put('/post/:postid', updatePost);
