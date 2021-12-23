@@ -79,8 +79,8 @@ router.post('/login', async (req, res) => {
             user.token = token;
             res.cookie('token', user.token);
             res.cookie('userid', user.id);
-            localStorage.setItem("token", user.token);
-            localStorage.setItem("userid", user.id);
+            // localStorage.setItem("token", user.token);
+            // localStorage.setItem("userid", user.id);
             return res.status(200).json({token: user.token, userid: user.id});
         }
 
@@ -119,5 +119,23 @@ router.post('/logout', async (req, res) => {
 
     res.send("No cookies for auth found!");
 });
+
+router.get('/isloggedin', async (req, res) => {
+    const token = req.headers['token'];
+    const userid = req.headers['userid'];
+
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        
+        if (decoded.user_id === userid) {
+            return res.json({ auth: true });
+        }
+        return res.json({auth:false})
+    }
+    catch(err) {
+        res.json({auth:false})
+    }
+});
+
 
 export default router;
