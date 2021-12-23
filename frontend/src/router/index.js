@@ -4,17 +4,20 @@ import isAuth from '../cookies/isAuth.js'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/auth/Login.vue'
-
+import store from '../store.js';
 Vue.use(VueRouter)
 
-function loginTest(to, from, next) {
-  isAuth().then(res=> {
-    let isAuthenticated = res
-    if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+// function loginTest(to, from, next) {
+//   isAuth().then(res=> {
+//     let isAuthenticated = res
+//     if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//     else next()
+//   })
+//   // console.log(isAuthenticated);
+// }
+function loginTest2(to, from, next) {
+  if (to.name !== 'Login' && !(store.state.loggedIn)) next({ name: 'Login' })
     else next()
-  })
-  // console.log(isAuthenticated);
-  
 }
 
 const routes = [
@@ -28,7 +31,7 @@ const routes = [
     path: '/about',
     name: 'About',
     beforeEnter (to, from, next) {
-      loginTest(to, from, next)
+      loginTest2(to, from, next)
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
