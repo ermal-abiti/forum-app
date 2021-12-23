@@ -22,13 +22,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    beforeEnter (to, from, next) {
-      loginTest(to, from, next)
-  }
+    
   },
   {
     path: '/about',
     name: 'About',
+    beforeEnter (to, from, next) {
+      loginTest(to, from, next)
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -42,7 +43,7 @@ const routes = [
     beforeEnter (to, from, next) {
       isAuth().then(res =>{
         let isAuthenticated = res
-        if (to.name == 'Login' && isAuthenticated) next({name:'About'})
+        if (to.name == 'Login' && isAuthenticated) next({name:'Home'})
         else next()
       })
       
@@ -56,10 +57,5 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = getCookie('token') ? true : false
-//   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-//   else next()
-// })
 
 export default router

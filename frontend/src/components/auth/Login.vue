@@ -65,7 +65,7 @@ export default {
                     document.cookie = `userid=${res.data.userid}`
                     this.$store.dispatch('authCheck')
                 })
-                this.$router.push('home')
+                this.$router.push({path:'/'})
 
             }
             catch(err) {
