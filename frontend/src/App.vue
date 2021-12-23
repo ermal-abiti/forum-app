@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar/>
-
+    <home/>
     <div class="container mt-5">
       <div class="list-group" v-if="posts.length > 0">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" v-for="post in posts" v-bind:key="post._id">
@@ -22,12 +22,14 @@
 
 <script>
 import Navbar from "./components/parts/Navbar.vue"
+import home from "./components/parts/Home.vue"
 import axios from "axios"
 
 export default {
   name: 'App',
   components: {
     Navbar,
+    home,
   },
   data() {
     return {

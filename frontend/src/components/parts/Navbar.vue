@@ -1,48 +1,39 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-warning">
-    <div class="container">
-      <a class="navbar-brand" href="#">ForumApp</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Posts</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Disabled</a
-            >
-          </li> -->
-        </ul>
-        <!-- <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+  <nav class="navbar is-dark">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/#/">
+      Tigrat e Zi
+    </a>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/#/">
+        Posts
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-tw-button button">
+              
+              <span>
+                Register
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" >
+              <span>Login</span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 </template>
 
 <script>
