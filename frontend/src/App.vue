@@ -15,6 +15,13 @@
       </div>
       <p v-else>No posts yet! Use postman to add some posts...</p>
     </div>
+
+    <form @submit="loginMethod">
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+      <input type="submit" name="submitbtn" value="Submit">
+    
+    </form>
   
   </div>
 </template>
@@ -34,6 +41,16 @@ export default {
   data() {
     return {
       posts: [],  
+    }
+  },
+  methods: {
+    loginMethod(e) {
+      e.preventDefault();
+      axios.post("http://localhost:5050/api/users/login", {username: e.target.username.value, password: e.target.password.value})
+      .then(res => {
+        // console.log(res.data.token);
+        document.cookie = `token=${res.data.token}`
+      })
     }
   },
   mounted: function() {

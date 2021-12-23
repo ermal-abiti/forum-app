@@ -3,9 +3,11 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
+import { LocalStorage } from "node-localstorage";
 
 const router = Router();
 
+const localStorage = new LocalStorage('./users');
 
 router.post('/register', async (req, res) => {
     try {
@@ -77,6 +79,8 @@ router.post('/login', async (req, res) => {
             user.token = token;
             res.cookie('token', user.token);
             res.cookie('userid', user.id);
+            localStorage.setItem("token", user.token);
+            localStorage.setItem("userid", user.id);
             return res.status(200).json({token: user.token});
         }
 
