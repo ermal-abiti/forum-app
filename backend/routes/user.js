@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
             res.cookie('userid', user.id);
             localStorage.setItem("token", user.token);
             localStorage.setItem("userid", user.id);
-            return res.status(200).json({token: user.token});
+            return res.status(200).json({token: user.token, userid: user.id});
         }
 
         res.status(400).send("Invalid credentials!");
