@@ -1,0 +1,99 @@
+<template>
+    <div class="container mt-5">
+        <h1 class="title has-text-centered">Register</h1>
+        <div class="columns mt-5">
+            <div class="column is-one-third"></div>
+            <div class="column is-one-third">
+                <form class="form-horizontal" @submit="loginMethod">
+                    <fieldset>
+
+                    <!-- Form Name -->
+                    <legend></legend>
+
+                    <!-- Text input-->
+                    <div class="field">
+                    <label class="label" for="username">Username</label>
+                    <div class="control">
+                        <input id="username" name="username" type="text" placeholder="Username" class="input " required="">
+                        
+                    </div>
+                    </div>
+
+                    <div class="field">
+                    <label class="label" for="username">Full Name</label>
+                    <div class="control">
+                        <input id="fullName" name="fullName" type="text" placeholder="Full Name" class="input " required="">
+                        
+                    </div>
+                    </div>
+
+                    <div class="field">
+                    <label class="label" for="username">Email</label>
+                    <div class="control">
+                        <input id="email" name="email" type="text" placeholder="Email" class="input " required="">
+                        
+                    </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="field">
+                    <label class="label" for="password">Password</label>
+                    <div class="control">
+                        <input id="password" name="password" type="password" placeholder="Password" class="input " required="">
+                        
+                    </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="field">
+                    <label class="label" for="registerbtn"></label>
+                    <div class="control">
+                        <button id="registerbtn" name="registerbtn" class="button is-success">Register</button>
+                    </div>
+                    </div>
+
+                    </fieldset>
+                </form>
+            </div>
+            <div class="column is-one-third"></div>
+        </div>
+
+    </div>
+</template>
+
+<script>
+import axios from "axios"
+
+export default {
+    name: "Register",
+    methods: {
+        loginMethod(e) {
+            e.preventDefault();
+            try {
+                axios.post("http://localhost:5050/api/users/register", 
+                    {
+                    username: e.target.username.value,
+                    fullName: e.target.fullName.value,
+                    email: e.target.email.value,
+                    password: e.target.password.value
+                })
+                .then(res => {
+                    console.log(res.data);
+                    document.cookie = `token=${res.data.token}`
+                    document.cookie = `userid=${res.data.userid}`
+                    this.$store.dispatch('authCheck')
+                })
+                this.$router.push({path:'/'})
+
+            }
+            catch(err) {
+                console.log(err);
+            }
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

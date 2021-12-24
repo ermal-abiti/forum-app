@@ -47,7 +47,10 @@ router.post('/register', async (req, res) => {
             }
         );
         
-        res.status(201).send(`User registered successfully as '${user.username}'`);
+        res.status(201).json({
+            userid: user._id,
+            token: token
+        });
     }
     catch (err) {
         console.log(err);
@@ -79,8 +82,6 @@ router.post('/login', async (req, res) => {
             user.token = token;
             res.cookie('token', user.token);
             res.cookie('userid', user.id);
-            // localStorage.setItem("token", user.token);
-            // localStorage.setItem("userid", user.id);
             return res.status(200).json({token: user.token, userid: user.id});
         }
 
