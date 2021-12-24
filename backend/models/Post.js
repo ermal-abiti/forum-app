@@ -13,11 +13,10 @@ const postSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    userId: {
-        type: String,
-        required: true
+    creator: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }
-})
+}, {version:0})
 
 mongoose.connect("mongodb://localhost:27017/forumAppDb");
 const Post = mongoose.model("Post", postSchema);

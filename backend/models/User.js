@@ -26,7 +26,12 @@ const userSchema = mongoose.Schema({
     token: {
         type: String,
     },
-})
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId, ref: 'Post'
+        }
+    ]
+}, {version: 0})
 
 mongoose.connect("mongodb://localhost:27017/forumAppDb");
 const User = mongoose.model("User", userSchema);

@@ -156,5 +156,20 @@ router.get('/getLoggedUser', auth, async (req, res) => {
     
 });
 
+router.get('/getUserById', async (req, res) => {
+    const userid = req.headers['userid'];
+    try {
+        const user = await User.findOne({_id: userid});
+        res.status(200).json({ 
+            user_id: user._id,
+            fullName: user.fullName,
+            username: user.username,
+            email: user.email,
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+});
+
 
 export default router;

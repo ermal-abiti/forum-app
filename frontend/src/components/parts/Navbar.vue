@@ -38,7 +38,7 @@
                 <button class="bd-tw-button button is-danger" @click="logOut">
                   
                   <span>
-                    Log Out as {{ $store.state.user }}
+                    Log Out as <b>{{ $store.state.user }}</b>
                   </span>
                 </button>
               </p>

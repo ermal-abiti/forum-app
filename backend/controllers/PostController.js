@@ -1,9 +1,13 @@
 import Post from "../models/Post.js";
+import User from "../models/User.js";
 import { ObjectId } from "mongodb";
 
 export async function getAllPosts (req, res) {
     try {
         const result = await Post.find({});
+        for (let i =0; i<result.length; i++){
+            result[i].creator = await User.findOne({_id: result[i].creator})
+        }
         return res.status(200).json(result);
     }
     catch (err) {
@@ -27,7 +31,10 @@ export async function addPost (req, res) {
     const data = req.body;
 
     data.dateCreated = new Date().toISOString();
-    data.userId = req.cookies['userid'];
+    const userId = req.cookies['userid'] || req.headers['userid'];
+    // const creator = await User.findOne({_id: userId});
+    // console.log(creator);
+    data.creator = await User.findOne({_id: userId});
 
     const newPost = new Post(data);
 
