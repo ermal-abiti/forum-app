@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import jwtDecode from "jwt-decode";
 import { LocalStorage } from "node-localstorage";
+import auth from "../middleware/auth.js";
+import { ObjectId } from "mongodb";
 
 const router = Router();
 
@@ -136,6 +138,22 @@ router.get('/isloggedin', async (req, res) => {
     catch(err) {
         res.json({auth:false})
     }
+});
+
+router.get('/getLoggedUser', auth, async (req, res) => {
+    const userid = req.headers['userid'];
+    try {
+        const user = await User.findOne({_id: userid});
+        res.status(200).json({ 
+            user_id: user._id,
+            fullName: user.fullName,
+            username: user.username,
+            email: user.email,
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+    
 });
 
 

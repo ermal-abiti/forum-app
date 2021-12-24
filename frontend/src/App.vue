@@ -15,7 +15,8 @@ export default {
   },
   created() {
     this.$store.dispatch('authCheck')
-  }
+    this.$store.dispatch('userLoggedIn')
+  },
 }
 </script>
 

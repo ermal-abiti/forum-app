@@ -9,7 +9,7 @@ cnf();
 const config = process.env;
 
 const verifyToken = (req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers["authorization"] || req.cookies['token'] || localStorage.getItem('token');
+  const token = req.body.token || req.query.token || req.headers["authorization"] || req.headers["token"] || req.cookies['token'] || localStorage.getItem('token');
 
   if (!token) {
     return res.status(403).send("You need to be authenticated to access this endpoint!");

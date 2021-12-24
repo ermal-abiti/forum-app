@@ -35,10 +35,10 @@
 
             <div class="field is-grouped" v-else>
               <p class="control">
-                <button class="bd-tw-button button" @click="logOut">
+                <button class="bd-tw-button button is-danger" @click="logOut">
                   
                   <span>
-                    Log Out
+                    Log Out as {{ $store.state.user }}
                   </span>
                 </button>
               </p>
@@ -57,6 +57,7 @@ export default {
       logOut() {
         document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
         this.$store.dispatch('authCheck')
+        this.$store.dispatch('userLoggedIn')
         this.$router.push('Login')
       }
     }

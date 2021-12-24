@@ -64,6 +64,7 @@ export default {
                     document.cookie = `token=${res.data.token}`
                     document.cookie = `userid=${res.data.userid}`
                     this.$store.dispatch('authCheck')
+                    this.$store.dispatch('userLoggedIn')
                 })
                 this.$router.push({path:'/'})
 
