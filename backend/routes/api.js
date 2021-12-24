@@ -12,7 +12,7 @@ const router = Router();
 
 // Post Routes
 router.get('/posts', auth, getAllPosts);
-router.post('/addpost', addPost);
+router.post('/addpost', auth, addPost);
 router.get('/post/:postid', getPostById);
 router.put('/post/:postid', updatePost);
 router.delete('/post/:postid', deletePost);

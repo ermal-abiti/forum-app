@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 export async function getAllPosts (req, res) {
     try {
-        const result = await Post.find({});
+        const result = await Post.find({}).sort({"dateCreated": -1});
         for (let i =0; i<result.length; i++){
             result[i].creator = await User.findOne({_id: result[i].creator})
         }

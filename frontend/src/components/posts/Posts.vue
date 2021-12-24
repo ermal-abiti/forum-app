@@ -1,6 +1,7 @@
 <template>
     <div class="container mt-5">
-        <article class="media" v-for="post in this.$store.state.posts" v-bind:key="post._id">
+        <add-post/>
+        <article class="media mt-5" v-for="post in this.$store.state.posts" v-bind:key="post._id">
             <figure class="media-left">
                 <p class="image is-64x64">
                 <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -10,7 +11,7 @@
             <div class="media-content">
                 <div class="content">
                 <p>
-                    <strong>{{ post.creator.fullName }}</strong> <small>@johnsmith</small> <small>{{ post.dateCreated.slice(0,10) }}</small>
+                    <strong>{{ post.creator.fullName }}</strong> <small>@{{ post.creator.username }}</small> <small>{{ post.dateCreated.slice(0,10) }}</small>
                     <br>
                     {{ post.content }}
                 </p>
@@ -37,9 +38,12 @@
 </template>
 
 <script>
+import AddPost from "./AddPost.vue"
+
 export default {
     name: 'Posts',
     components: {
+        AddPost
     },
     mounted() {
         this.$store.dispatch('getAllPosts')
