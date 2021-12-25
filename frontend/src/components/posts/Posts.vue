@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <add-post/>
+        <add-post v-if="this.$store.state.loggedIn"/>
         <article class="media mt-5" v-for="post in this.$store.state.posts" v-bind:key="post._id">
             <figure class="media-left">
                 <p class="image is-64x64">

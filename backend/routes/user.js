@@ -9,7 +9,34 @@ import { ObjectId } from "mongodb";
 
 const router = Router();
 
-const localStorage = new LocalStorage('./users');
+
+
+async function authenticate(req) {
+    const token = req.headers['token'];
+    try {
+        if (token) {
+            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+                if (decoded) {
+                    const user = await User.findOne({_id: decoded.user_id})
+                    const data = { auth: true, user: {
+                        _id: user._id,
+                        username: user.username
+                    } }
+                    return data;
+                }
+                else {
+                    return {auth: false}
+                }
+        }
+        else {
+            return {auth: false}
+        }
+    }
+    catch(err) {
+        return {auth:false}
+    }
+
+}
 
 router.post('/register', async (req, res) => {
     try {
@@ -115,6 +142,7 @@ router.get('/loggeduser', async (req, res) => {
     res.send();
 });
 
+// ***for api use only
 router.post('/logout', async (req, res) => {
     if (req.cookies['token'] && req.cookies['userid']) {
         return res.clearCookie('token').clearCookie('userid').status(200).send('Logged out successfully!');
@@ -124,36 +152,28 @@ router.post('/logout', async (req, res) => {
 });
 
 router.get('/isloggedin', async (req, res) => {
-    const token = req.headers['token'];
-    const userid = req.headers['userid'];
-
+    const data = await authenticate(req)
     try {
-        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-        
-        if (decoded.user_id === userid) {
-            return res.json({ auth: true });
-        }
-        return res.json({auth:false})
+        return res.json(data)
     }
-    catch(err) {
-        res.json({auth:false})
+    catch (err) {
+        return res.json({auth : false})
     }
 });
 
 router.get('/getLoggedUser', auth, async (req, res) => {
-    const userid = req.headers['userid'];
-    try {
-        const user = await User.findOne({_id: userid});
-        res.status(200).json({ 
-            user_id: user._id,
+    const data = await authenticate(req)
+    console.log(data);
+    if (data.user){
+        console.log("User defined");
+        const user = await User.findOne({_id: data.user._id});
+        return res.status(200).json({ 
+            _id: user._id,
             fullName: user.fullName,
             username: user.username,
             email: user.email,
         });
-    } catch (error) {
-        console.log(error.message);
     }
-    
 });
 
 router.get('/getUserById', async (req, res) => {

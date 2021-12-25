@@ -15,8 +15,7 @@ export default async function isAuth() {
 
         const result = await axios.get("http://localhost:5050/api/users/isloggedin", {
             headers: {
-                "token": getCookie("token"),
-                "userid": getCookie("userid")
+                "token": getCookie("token")
             }
         })
         let auth = result.data.auth

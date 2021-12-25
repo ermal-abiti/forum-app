@@ -11,6 +11,7 @@
         <div class="navbar-start">
             <router-link to="/" class="navbar-item">Home</router-link>
             <router-link to="/about" class="navbar-item">About</router-link>
+            <router-link to="/posts" class="navbar-item">Posts</router-link>
         </div>
 
         <div class="navbar-end">
@@ -38,7 +39,7 @@
                 <button class="bd-tw-button button is-danger" @click="logOut">
                   
                   <span>
-                    Log Out as <b>{{ $store.state.user }}</b>
+                    Log Out as <b>{{ $store.state.user.username }}</b>
                   </span>
                 </button>
               </p>

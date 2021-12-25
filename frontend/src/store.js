@@ -8,7 +8,6 @@ Vue.use(Vuex)
 
 const authHeaders = {
     headers: {
-        userid: getCookie('userid'),
         token: getCookie('token')
     }
 }
@@ -33,20 +32,11 @@ const mutations = {
     async userLoggedIn(state) {
         const result = await axios.get('http://localhost:5050/api/users/getLoggedUser', {
                 headers: {
-                    userid: getCookie('userid'),
                     token: getCookie('token')
                 }
             })
-        state.user = result.data.username
-    
-    },
-    async getUserById(state, { userid }) {
-        const result = await axios.get('http://localhost:5050/api/users/getLoggedUser', {
-                headers: {
-                    userid
-                }
-            })
         state.user = result.data
+    
     },
     // get all posts - mutation
     async getAllPosts(state) {
@@ -70,7 +60,6 @@ const actions = {
     userLogIn: ({commit})=> commit('userLogIn'),
     userLoggedIn: ({commit})=> commit('userLoggedIn'),
     getAllPosts: ({commit})=> commit('getAllPosts'),
-    getUserById: ({commit})=> commit('getUserById'),
 }
 export default new Vuex.Store({
     state,
