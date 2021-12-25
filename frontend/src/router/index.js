@@ -8,6 +8,7 @@ import Register from '../components/auth/Register.vue'
 import store from '../store.js';
 
 import Posts from '../components/posts/Posts.vue'
+import UserProfiles from '../components/profiles/UserProfiles.vue'
 
 
 Vue.use(VueRouter)
@@ -69,6 +70,11 @@ const routes = [
     path: '/posts',
     name: 'Posts',
     component: Posts
+  },
+  {
+    path: '/userprofile',
+    name: 'UserProfiles',
+    component: UserProfiles
   }
 ]
 
