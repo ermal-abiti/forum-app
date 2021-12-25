@@ -84,7 +84,6 @@
                     </a>
                 </div>
               </div>
-
     </div>
   </div>
 </div>
@@ -98,7 +97,6 @@ export default {
 </script>
 
 <style>
-
 .stat-val {
   font-size: 3em;
   padding-top: 20px;
