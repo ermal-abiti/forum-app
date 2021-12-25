@@ -1,7 +1,94 @@
 <template>
-  <div>
-      user profile here...
+<div>
+  <div class='columns'>
+  <div class='container profile'>
+    <div class='section profile-heading'>
+      <div class='columns is-mobile is-multiline'>
+        <div class='column is-2'>
+          <span class='header-icon user-profile-image'>
+            <img class="imgprofile" src='avatarr.png' >
+          </span>
+        </div>
+        <div class='column is-4-tablet is-10-mobile name'>
+          <p>
+            <span class='title is-bold'>Leon Berisha</span>
+            
+          </p>
+          <p class='tagline'>
+            Leoni o bossi ma i fort i te gjitha kohrave .
+          </p>
+        </div>
+        <div class='column is-2-tablet is-4-mobile has-text-centered'>
+          <p class='stat-val'>15</p>
+          <p class='stat-key'>searches</p>
+        </div>
+        <div class='column is-2-tablet is-4-mobile has-text-centered'>
+          <p class='stat-val'>100</p>
+          <p class='stat-key'>Likes</p>
+        </div>
+        <div class='column is-2-tablet is-4-mobile has-text-centered'>
+          <p class='stat-val'>5</p>
+          <p class='stat-key'>Retweets</p>
+        </div>
+      </div>
+    </div>
+    <div class='profile-options is-fullwidth'>
+      <div class='tabs is-fullwidth is-medium'>
+        <ul>
+          <li class='link'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-list'></i>
+              </span>
+              <span>Tweets & Replies</span>
+            </a>
+          </li>
+          <li class='link'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-thumbs-up'></i>
+              </span>
+              <span>Likes</span>
+            </a>
+          </li>
+          <li class='link'>
+            <a>
+              <span class='icon'>
+                <i class='fa fa-search'></i>
+              </span>
+              <span>Searches</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+    <div class='box' style='border-radius: 0px;'>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                    <strong>Leon</strong> <small>@leonb</small> <small>13:45</small>
+                    <br>
+                    KAJVNKJNVKJANLAKMLQANLDNCKJLDNEVLOINKE
+                </p>
+              </div>
+                <div class="level-left">
+                    <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                    </a>
+                </div>
+              </div>
+
+    </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -11,5 +98,40 @@ export default {
 </script>
 
 <style>
+
+.stat-val {
+  font-size: 3em;
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+.stat-key {
+  font-size: 1.4em;
+  font-weight: 200;
+}
+
+.section.profile-heading .column.is-2-tablet.has-text-centered + .has-text-centered {
+  border-left: 1px dotted rgba(0, 0, 0, 0.2);
+}
+
+.container.profile {
+  margin-top: 1%;
+}
+
+.control.is-pulled-left span.select {
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.modal-card .content h1 {
+  padding: 40px 10px 10px;
+  border-bottom: 1px solid #dadada;
+}
+
+.container.profile .profile-options .tabs ul li.link a {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #F1F1F1;
+}
 
 </style>
