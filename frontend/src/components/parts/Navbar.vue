@@ -2,28 +2,16 @@
   <nav class="navbar is-dark">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/#/">
+        <router-link class="navbar-item" to="/">
           Forum App
-        </a>
+        </router-link>
       </div>
 
     <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
-      <router-link class="navbar-item" to="/">Home</router-link>
+      <!-- <router-link class="navbar-item" to="/">Home</router-link> -->
+      <router-link class="navbar-item" to="/posts">Posts</router-link>
       <router-link class="navbar-item" to="/about">About</router-link>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">More</a>
-        <div class="navbar-dropdown is-boxed">
-          <router-link class="navbar-item" to="/userprofile">Profile</router-link>
-          <router-link class="navbar-item" to="/posts">Posts</router-link>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Login/Logout coming soon
-          </a>
-          
-        </div>
-      </div>
     </div>
 
 

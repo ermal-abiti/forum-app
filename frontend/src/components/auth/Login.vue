@@ -1,43 +1,51 @@
 <template>
     <div class="container mt-5">
-        <h1 class="title has-text-centered">Log In</h1>
         <div class="columns mt-5">
             <div class="column is-one-third"></div>
             <div class="column is-one-third">
-                <form class="form-horizontal" @submit="loginMethod">
-                    <fieldset>
+                <div class="card">
+                    <div class="card-content title">
+                        <p class="title">Already a member ?</p>
+                        <p class="subtitle">Log In to continue...</p>
+                    </div>
+                    <div class="card-content">
 
-                    <!-- Form Name -->
-                    <legend></legend>
+                        <form class="form-horizontal" @submit="loginMethod">
+                            <fieldset>
 
-                    <!-- Text input-->
-                    <div class="field">
-                    <label class="label" for="username">Username</label>
-                    <div class="control">
-                        <input id="username" name="username" type="text" placeholder="Username" class="input " required="">
-                        
-                    </div>
-                    </div>
+                            <!-- Form Name -->
+                            <legend></legend>
 
-                    <!-- Password input-->
-                    <div class="field">
-                    <label class="label" for="password">Password</label>
-                    <div class="control">
-                        <input id="password" name="password" type="password" placeholder="Password" class="input " required="">
-                        
-                    </div>
-                    </div>
+                            <!-- Text input-->
+                            <div class="field">
+                            <label class="label" for="username">Username</label>
+                            <div class="control">
+                                <input id="username" name="username" type="text" placeholder="Username" class="input " required="">
+                                
+                            </div>
+                            </div>
 
-                    <!-- Button -->
-                    <div class="field">
-                    <label class="label" for="loginbtn"></label>
-                    <div class="control">
-                        <button id="loginbtn" name="loginbtn" class="button is-success">Login</button>
-                    </div>
-                    </div>
+                            <!-- Password input-->
+                            <div class="field">
+                            <label class="label" for="password">Password</label>
+                            <div class="control">
+                                <input id="password" name="password" type="password" placeholder="Password" class="input " required="">
+                                
+                            </div>
+                            </div>
 
-                    </fieldset>
-                </form>
+                            <!-- Button -->
+                            <div class="field mt-5">
+                            <label class="label" for="loginbtn"></label>
+                            <div class="control">
+                                <button id="loginbtn" name="loginbtn" class="button is-fullwidth is-outlined is-success">Login</button>
+                            </div>
+                            </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="column is-one-third"></div>
         </div>
