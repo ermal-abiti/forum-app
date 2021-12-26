@@ -7,13 +7,25 @@
         </a>
       </div>
 
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-start">
-            <router-link to="/" class="navbar-item">Home</router-link>
-            <router-link to="/about" class="navbar-item">About</router-link>
-            <router-link to="/posts" class="navbar-item">Posts</router-link>
-            <router-link to="/userprofile" class="navbar-item">Profile</router-link>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <router-link class="navbar-item" to="/">Home</router-link>
+      <router-link class="navbar-item" to="/about">About</router-link>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">More</a>
+        <div class="navbar-dropdown is-boxed">
+          <router-link class="navbar-item" to="/userprofile">Profile</router-link>
+          <router-link class="navbar-item" to="/posts">Posts</router-link>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Login/Logout coming soon
+          </a>
+          
         </div>
+      </div>
+    </div>
+
 
         <div class="navbar-end">
           <div class="navbar-item">
