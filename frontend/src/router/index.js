@@ -9,7 +9,7 @@ import store from '../store.js';
 
 import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
-
+import AdvisorProfiles from '../components/profiles/AdvisorProfiles.vue'
 
 Vue.use(VueRouter)
 
@@ -75,6 +75,11 @@ const routes = [
     path: '/userprofile',
     name: 'UserProfiles',
     component: UserProfiles
+  },
+  {
+    path: '/advisorprofiles',
+    name: 'AdvisorProfiles',
+    component: AdvisorProfiles
   }
 ]
 
