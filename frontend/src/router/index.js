@@ -5,8 +5,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/auth/Login.vue'
 import Register from '../components/auth/Register.vue'
-import store from '../store.js';
-
+import store from '../store.js'
 import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
 

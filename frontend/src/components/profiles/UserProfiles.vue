@@ -2,13 +2,16 @@
 <div>
   <div class='columns'>
   <div class='container profile'>
+    <!-- Profile section -->
     <div class='section profile-heading'>
       <div class='columns is-mobile is-multiline'>
+        <!-- Profile content -->
         <div class='column is-2'>
           <span class='header-icon user-profile-image'>
-            <img class="imgprofile" src='avatarr.png' >
+            <img class="imgprofile" src='/avatarr.png' >
           </span>
         </div>
+        <!-- Name and Bio -->
         <div class='column is-4-tablet is-10-mobile name'>
           <p>
             <span class='title is-bold'>Leon Berisha</span>
@@ -18,6 +21,7 @@
             Leoni o bossi ma i fort i te gjitha kohrave .
           </p>
         </div>
+        <!-- Profile Data -->
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
           <p class='stat-val'>15</p>
           <p class='stat-key'>searches</p>
@@ -32,6 +36,7 @@
         </div>
       </div>
     </div>
+    <!-- Interactions data -->
     <div class='profile-options is-fullwidth'>
       <div class='tabs is-fullwidth is-medium'>
         <ul>
@@ -63,6 +68,7 @@
         </ul>
       </div>
     </div>
+    <!-- Posts -->
     <div class='box' style='border-radius: 0px;'>
             <div class="media-content">
               <div class="content">
@@ -72,6 +78,7 @@
                     KAJVNKJNVKJANLAKMLQANLDNCKJLDNEVLOINKE
                 </p>
               </div>
+              <!-- Icons -->
                 <div class="level-left">
                     <a class="level-item">
                     <span class="icon is-small"><i class="fas fa-reply"></i></span>

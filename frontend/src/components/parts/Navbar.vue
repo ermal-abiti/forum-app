@@ -12,6 +12,7 @@
             <router-link to="/" class="navbar-item">Home</router-link>
             <router-link to="/about" class="navbar-item">About</router-link>
             <router-link to="/posts" class="navbar-item">Posts</router-link>
+            <router-link to="/userprofile" class="navbar-item">Profile</router-link>
         </div>
 
         <div class="navbar-end">
