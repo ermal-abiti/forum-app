@@ -8,7 +8,7 @@
         <!-- Profile content -->
         <div class='column is-2'>
           <span class='header-icon user-profile-image'>
-            <img class="imgprofile" src='/avatarr.png' >
+            <img class="imgprofile" src='./avatarr.png' >
           </span>
         </div>
         <!-- Name and Bio -->
@@ -24,15 +24,15 @@
         <!-- Profile Data -->
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
           <p class='stat-val'>15</p>
-          <p class='stat-key'>searches</p>
+          <p class='stat-key'>Followers</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
           <p class='stat-val'>100</p>
-          <p class='stat-key'>Likes</p>
+          <p class='stat-key'>Following</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
           <p class='stat-val'>5</p>
-          <p class='stat-key'>Retweets</p>
+          <p class='stat-key'>Likes</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
               <span class='icon'>
                 <i class='fa fa-list'></i>
               </span>
-              <span>Tweets & Replies</span>
+              <span>Posts</span>
             </a>
           </li>
           <li class='link'>

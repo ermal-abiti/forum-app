@@ -28,36 +28,25 @@
 
 
         <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field is-grouped" v-if="!($store.state.loggedIn)">
-              <p class="control">
-                <a class="bd-tw-button button">
-                  
-                  <span>
-                    <router-link to="/register" class="has-text-black">Register</router-link>
-                  </span>
-                </a>
-              </p>
-              <p class="control">
-                <a class="button is-primary" >
-                  <span>
-                    <router-link to="/login" class="has-text-white">Login</router-link>
-                  </span>
-                </a>
-              </p>
-            </div>
-
-            <div class="field is-grouped" v-else>
-              <p class="control">
-                <button class="bd-tw-button button is-danger" @click="logOut">
-                  
-                  <span>
-                    Log Out as <b>{{ $store.state.user.username }}</b>
-                  </span>
-                </button>
-              </p>
+          <div class="navbar-item has-dropdown is-hoverable" v-if="!($store.state.loggedIn)">
+            <a class="navbar-link">Account</a>
+            <div class="navbar-dropdown is-boxed">
+              <router-link class="navbar-item" to="/login">Login</router-link>
+              <router-link class="navbar-item" to="/register">Register</router-link>
+              
             </div>
           </div>
+
+          <div class="navbar-item has-dropdown is-hoverable" v-else>
+            <a class="navbar-link">{{ $store.state.user.username }}</a>
+            <div class="navbar-dropdown is-boxed">
+              <router-link class="navbar-item" to="/userprofile">My Profile</router-link>
+              <hr class="navbar-divider">
+              <a class="navbar-item has-text-danger" @click="logOut">Logout</a>
+              
+            </div>
+          </div>
+
         </div>
       </div>
   </div>
