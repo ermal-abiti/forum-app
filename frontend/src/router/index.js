@@ -8,6 +8,7 @@ import Register from '../components/auth/Register.vue'
 import store from '../store.js'
 import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
+import SinglePost from '../components/posts/SinglePost.vue'
 
 
 Vue.use(VueRouter)
@@ -74,6 +75,11 @@ const routes = [
     path: '/userprofile',
     name: 'UserProfiles',
     component: UserProfiles
+  },
+  {
+    path: '/singlepost',
+    name: 'SinglePost',
+    component: SinglePost
   }
 ]
 
