@@ -1,5 +1,10 @@
 <template>
     <div class="container mt-5">
+        <article class="message is-danger" v-if="this.$route.query.invalid">
+            <div class="message-body">
+                Check username and password
+            </div>
+        </article>
         <div class="columns mt-5">
             <div class="column is-one-third"></div>
             <div class="column is-one-third">
@@ -20,7 +25,7 @@
                             <div class="field">
                             <label class="label" for="username">Username</label>
                             <div class="control">
-                                <input id="username" name="username" type="text" placeholder="Username" class="input " required="">
+                                <input v-model="username"  id="username" name="username" type="text" placeholder="Username" class="input " required="">
                                 
                             </div>
                             </div>
@@ -29,7 +34,7 @@
                             <div class="field">
                             <label class="label" for="password">Password</label>
                             <div class="control">
-                                <input id="password" name="password" type="password" placeholder="Password" class="input " required="">
+                                <input v-model="password"  id="password" name="password" type="password" placeholder="Password" class="input " required="">
                                 
                             </div>
                             </div>
@@ -73,14 +78,20 @@ export default {
                     document.cookie = `userid=${res.data.userid}`
                     this.$store.dispatch('authCheck')
                     this.$store.dispatch('userLoggedIn')
+                    this.$router.push({path:'/'})
                 })
-                this.$router.push({path:'/'})
+                .catch(err => {
+                    console.log(err.message);
+                    this.username = ''
+                    this.password = ''
+                    this.$router.push({name:'Login', query: {invalid: "true"}})
+                })
 
             }
             catch(err) {
                 console.log(err);
             }
-        }
+        },
     }
 }
 </script>
