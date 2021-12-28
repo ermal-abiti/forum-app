@@ -41,7 +41,7 @@
       <div class='tabs is-fullwidth is-medium'>
         <ul>
           <li class='link'>
-            <a>
+            <a @click="showThePosts">
               <span class='icon'>
                 <i class='fa fa-list'></i>
               </span>
@@ -49,52 +49,46 @@
             </a>
           </li>
           <li class='link'>
-            <a>
+            <a @click="showTheLikes">
               <span class='icon'>
                 <i class='fa fa-thumbs-up'></i>
               </span>
               <span>Likes</span>
             </a>
           </li>
-          <li class='link'>
-            <a>
-              <span class='icon'>
-                <i class='fa fa-search'></i>
-              </span>
-              <span>Searches</span>
-            </a>
-          </li>
-          
         </ul>
       </div>
     </div>
     <!-- Posts -->
-    <div class='box' style='border-radius: 0px;' v-for="post in $store.state.user.posts" v-bind:key="post._id">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                    <strong>{{ $store.state.user.fullName }}</strong> <small>@{{ $store.state.user.username }}</small> <small>{{ post.dateCreated }}</small>
-                    <br>
-                    {{ post.content }}
-                </p>
-              </div>
-              <!-- Icons -->
-                <div class="level-left">
-                    <a class="level-item">
-                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                    </a>
-                    <a class="level-item">
-                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                    </a>
-                    <a class="level-item">
-                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                    </a>
-                </div>
-              </div>
+      <div v-if="showPosts">
+            <div class='box' style='border-radius: 0px;' v-for="post in $store.state.user.posts" v-bind:key="post._id">
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                          <strong>{{ $store.state.user.fullName }}</strong> <small>@{{ $store.state.user.username }}</small> <small>{{ post.dateCreated }}</small>
+                          <br>
+                          {{ post.content }}
+                      </p>
+                    </div>
+                    <!-- Icons -->
+                      <div class="level-left">
+                          <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                          </a>
+                          <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                          </a>
+                          <a class="level-item">
+                          <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                          </a>
+                      </div>
+                    </div>
 
+            </div>
+      </div>
+    
     </div>
   </div>
-</div>
 </div>
 
 <div v-else>
@@ -108,6 +102,26 @@
 
 export default {
   name: 'UserProfiles',
+  data() {
+    return {
+      showPosts: true,
+      showLikes: false,
+    }
+  },
+  methods: {
+    showThePosts(e) {
+      e.preventDefault()
+      this.showPosts = true
+      this.showLikes = false
+
+    },
+    showTheLikes(e) {
+      e.preventDefault()
+      this.showLikes = true
+      this.showPosts = false
+
+    },
+  },
   mounted() {
     this.$store.dispatch('userLoggedIn')
   }
