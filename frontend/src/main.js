@@ -15,4 +15,3 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-// comment for testing commit
