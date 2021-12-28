@@ -72,7 +72,10 @@ const routes = [
   {
     path: '/userprofile',
     name: 'UserProfiles',
-    component: UserProfiles
+    component: UserProfiles,
+    beforeEnter (to, from, next) {
+      loginTest(to, from, next)
+    }
   },
 ]
 

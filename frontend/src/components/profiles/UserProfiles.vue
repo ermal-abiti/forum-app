@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="$store.state.loggedIn">
   <div class='columns'>
   <div class='container profile'>
     <!-- Profile section -->
@@ -14,20 +14,20 @@
         <!-- Name and Bio -->
         <div class='column is-4-tablet is-10-mobile name'>
           <p>
-            <span class='title is-bold'>Leon Berisha</span>
+            <span class='title is-bold'>{{ $store.state.user.fullName }}</span>
             
           </p>
           <p class='tagline'>
-            Leoni o bossi ma i fort i te gjitha kohrave .
+           @{{ $store.state.user.username }}
           </p>
         </div>
         <!-- Profile Data -->
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
-          <p class='stat-val'>15</p>
+          <p class='stat-val'>{{ $store.state.user.followers.length }}</p>
           <p class='stat-key'>Followers</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
-          <p class='stat-val'>100</p>
+          <p class='stat-val'>{{ $store.state.user.following.length }}</p>
           <p class='stat-key'>Following</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
@@ -69,13 +69,13 @@
       </div>
     </div>
     <!-- Posts -->
-    <div class='box' style='border-radius: 0px;'>
+    <div class='box' style='border-radius: 0px;' v-for="post in $store.state.user.posts" v-bind:key="post._id">
             <div class="media-content">
               <div class="content">
                 <p>
-                    <strong>Leon</strong> <small>@leonb</small> <small>13:45</small>
+                    <strong>{{ $store.state.user.fullName }}</strong> <small>@{{ $store.state.user.username }}</small> <small>{{ post.dateCreated }}</small>
                     <br>
-                    KAJVNKJNVKJANLAKMLQANLDNCKJLDNEVLOINKE
+                    {{ post.content }}
                 </p>
               </div>
               <!-- Icons -->
@@ -96,11 +96,21 @@
   </div>
 </div>
 </div>
+
+<div v-else>
+  You are not authenticated
+</div>
 </template>
 
 <script>
-export default {
+// import axios from "axios"
+// import getCookie from '../../cookies/getCookie.js'
 
+export default {
+  name: 'UserProfiles',
+  mounted() {
+    this.$store.dispatch('userLoggedIn')
+  }
 }
 </script>
 

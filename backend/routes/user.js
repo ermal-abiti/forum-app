@@ -1,9 +1,8 @@
 import { Router } from "express";
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import jwtDecode from "jwt-decode";
-import { LocalStorage } from "node-localstorage";
 import auth from "../middleware/auth.js";
 import { ObjectId } from "mongodb";
 
@@ -117,13 +116,44 @@ router.get('/isloggedin', auth, async (req, res) => {
 
 router.get('/getLoggedUser', auth, async (req, res) => {
     const user = await User.findOne({_id: req.user.user_id});
+    const posts = await Post.find({creator: user._id}).sort({"dateCreated": -1});
     return res.status(200).json({ 
         _id: user._id,
         fullName: user.fullName,
         username: user.username,
         email: user.email,
+        followers: user.followers,
+        following: user.following,
+        posts: posts
     });
 });
 
+
+// user followers system
+router.post('/follow', auth, async (req, res) => {
+    const followerUser = await User.findOne({ _id: req.user.user_id });
+    const followingUser = await User.findOne({ _id: req.body.following });
+
+    if (String(followerUser._id) !== String(followingUser._id)) {
+        if (!(followerUser.following.includes(String(followingUser._id)))) {
+            followerUser.following.push(followingUser._id)
+            followingUser.followers.push(followerUser._id)
+    
+            followerUser.save();
+            followingUser.save();
+        }
+        else {
+            return res.json("User is already followed!")
+        }
+        return res.json({
+            data: {
+                follower: followerUser,
+                following: followingUser
+            }
+        });
+    }
+    return res.send("You cannot follow yourself!");
+
+});
 
 export default router;
