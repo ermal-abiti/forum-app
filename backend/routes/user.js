@@ -111,14 +111,8 @@ router.post('/logout', auth, async (req, res) => {
     res.send("No cookies for auth found!");
 });
 
-router.get('/isloggedin', async (req, res) => {
-    const data = await authenticate(req)
-    try {
-        return res.json(data)
-    }
-    catch (err) {
-        return res.json({auth : false})
-    }
+router.get('/isloggedin', auth, async (req, res) => {
+    return res.json({auth: true})
 });
 
 router.get('/getLoggedUser', auth, async (req, res) => {
