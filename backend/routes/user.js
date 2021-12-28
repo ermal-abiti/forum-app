@@ -10,34 +10,6 @@ import { ObjectId } from "mongodb";
 const router = Router();
 
 
-
-async function authenticate(req) {
-    const token = req.headers['token'];
-    try {
-        if (token) {
-            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-                if (decoded) {
-                    const user = await User.findOne({_id: decoded.user_id})
-                    const data = { auth: true, user: {
-                        _id: user._id,
-                        username: user.username
-                    } }
-                    return data;
-                }
-                else {
-                    return {auth: false}
-                }
-        }
-        else {
-            return {auth: false}
-        }
-    }
-    catch(err) {
-        return {auth:false}
-    }
-
-}
-
 router.post('/register', async (req, res) => {
     try {
         const { fullName, username, email, password } = req.body;
@@ -128,22 +100,10 @@ router.get('/loggedin', (req, res) => {
     return res.send("No User is logged in")
 });
 
-// temp route
-router.get('/loggeduser', async (req, res) => {
-    if (req.cookies['token']) {
-        let token = req.cookies['token'];
-        let decoded = jwtDecode(token);
-        let user = await User.findOne({username: decoded.username});
 
-        return res.status(200).json({
-            id: user._id
-        });
-    }
-    res.send();
-});
 
 // ***for api use only
-router.post('/logout', async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
     if (req.cookies['token'] && req.cookies['userid']) {
         return res.clearCookie('token').clearCookie('userid').status(200).send('Logged out successfully!');
     }
@@ -162,33 +122,13 @@ router.get('/isloggedin', async (req, res) => {
 });
 
 router.get('/getLoggedUser', auth, async (req, res) => {
-    const data = await authenticate(req)
-    console.log(data);
-    if (data.user){
-        console.log("User defined");
-        const user = await User.findOne({_id: data.user._id});
-        return res.status(200).json({ 
-            _id: user._id,
-            fullName: user.fullName,
-            username: user.username,
-            email: user.email,
-        });
-    }
-});
-
-router.get('/getUserById', async (req, res) => {
-    const userid = req.headers['userid'];
-    try {
-        const user = await User.findOne({_id: userid});
-        res.status(200).json({ 
-            user_id: user._id,
-            fullName: user.fullName,
-            username: user.username,
-            email: user.email,
-        });
-    } catch (error) {
-        console.log(error.message);
-    }
+    const user = await User.findOne({_id: req.user.user_id});
+    return res.status(200).json({ 
+        _id: user._id,
+        fullName: user.fullName,
+        username: user.username,
+        email: user.email,
+    });
 });
 
 
