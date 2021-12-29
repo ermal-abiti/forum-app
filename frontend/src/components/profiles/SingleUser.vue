@@ -1,5 +1,5 @@
 <template>
-<div v-if="$store.state.loggedIn">
+<div v-if="user.username">
   <div class='columns'>
   <div class='container profile'>
     <!-- Profile section -->
@@ -14,20 +14,29 @@
         <!-- Name and Bio -->
         <div class='column is-4-tablet is-10-mobile name'>
           <p>
-            <span class='title is-bold'>{{ $store.state.user.fullName }}</span>
+            <span class='title is-bold'>{{ user.fullName }}</span>
             
           </p>
           <p class='tagline'>
-           @{{ $store.state.user.username }}
+           @{{ user.username }}
           </p>
+          <div v-if="!(this.$store.state.user.username == user.username)">
+            <button class="button is-info mt-5" v-if="isFollowing">
+                following
+            </button>
+            <button class="button is-outlined is-info mt-5" v-else>
+                follow
+            </button>
+
+          </div>
         </div>
         <!-- Profile Data -->
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
-          <p class='stat-val'>{{ $store.state.user.followers.length }}</p>
+          <p class='stat-val'>{{ user.followers.length }}</p>
           <p class='stat-key'>Followers</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
-          <p class='stat-val'>{{ $store.state.user.following.length }}</p>
+          <p class='stat-val'>{{ user.following.length }}</p>
           <p class='stat-key'>Following</p>
         </div>
         <div class='column is-2-tablet is-4-mobile has-text-centered'>
@@ -61,11 +70,11 @@
     </div>
     <!-- Posts -->
       <div v-if="showPosts">
-            <div class='box' style='border-radius: 0px;' v-for="post in $store.state.user.posts" v-bind:key="post._id">
+            <div class='box' style='border-radius: 0px;' v-for="post in user.posts" v-bind:key="post._id">
                   <div class="media-content">
                     <div class="content">
                       <p>
-                          <strong>{{ $store.state.user.fullName }}</strong> <small>@{{ $store.state.user.username }}</small> <small>{{ post.dateCreated }}</small>
+                          <strong>{{ user.fullName }}</strong> <small>@{{ user.username }}</small> <small>{{ post.dateCreated }}</small>
                           <br>
                           {{ post.content }}
                       </p>
@@ -91,24 +100,49 @@
   </div>
 </div>
 
-<div v-else>
-  You are not authenticated
+<div v-else class="container mt-5">
+    <article class="message is-danger">
+    <div class="message-body">
+        User not found
+    </div>
+    </article>
 </div>
+
 </template>
 
 <script>
-// import axios from "axios"
+import axios from "axios"
 // import getCookie from '../../cookies/getCookie.js'
 
 export default {
-  name: 'UserProfiles',
+  name: 'SingleUser',
   data() {
     return {
-      showPosts: true,
-      showLikes: false,
+        user: {},
+        showPosts: true,
+        showLikes: false,
+        
     }
   },
+  computed: {
+      isFollowing() {
+        if (this.$store.state.user.following.includes(this.user._id)) {
+            return true
+        }
+          return false
+      }
+  },
   methods: {
+    async getUser() {
+        try {
+          const result = await axios.get(`http://localhost:5050/api/users/getByUsername?username=${this.$route.query.username}`)
+          this.user = result.data
+        }
+        catch(err) {
+            this.user = {}
+            console.log(err);
+        }
+    },
     showThePosts(e) {
       e.preventDefault()
       this.showPosts = true
@@ -122,9 +156,10 @@ export default {
 
     },
   },
-  mounted() {
-    this.$store.dispatch('userLoggedIn')
-    console.log(this.$store.state.user);
+  async mounted() {
+      this.$store.dispatch('userLoggedIn')
+      await this.getUser()
+      
   }
 }
 </script>

@@ -8,6 +8,7 @@ import Register from '../components/auth/Register.vue'
 import store from '../store.js'
 import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
+import SingleUser from '../components/profiles/SingleUser.vue'
 
 Vue.use(VueRouter)
 
@@ -76,6 +77,11 @@ const routes = [
     beforeEnter (to, from, next) {
       loginTest(to, from, next)
     }
+  },
+  {
+    path: '/profile',
+    name: 'SingleUser',
+    component: SingleUser
   },
 ]
 

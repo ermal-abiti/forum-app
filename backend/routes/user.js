@@ -128,6 +128,27 @@ router.get('/getLoggedUser', auth, async (req, res) => {
     });
 });
 
+router.get('/getByUsername', async (req, res) => {
+    try {
+        console.log("e1");
+        const user = await User.findOne({username: req.query.username});
+        const posts = await Post.find({creator: user._id});
+        const { _id, username, email, fullName, followers, following } = user;
+        return res.status(200).json({
+            _id,
+            username,
+            email,
+            fullName,
+            followers,
+            following,
+            posts
+        });
+    }
+    catch(err) {
+        res.status(400).send("user not found");
+    }
+});
+
 
 // user followers system
 router.post('/follow', auth, async (req, res) => {
