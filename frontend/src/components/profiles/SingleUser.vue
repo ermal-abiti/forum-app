@@ -20,11 +20,11 @@
           <p class='tagline'>
            @{{ user.username }}
           </p>
-          <div v-if="!(this.$store.state.user.username == user.username)">
+          <div v-if="!(this.$store.state.user.username == user.username) && this.$store.state.loggedIn">
             <button class="button is-info mt-5" v-if="isFollowing">
                 following
             </button>
-            <button class="button is-outlined is-info mt-5" v-else>
+            <button @click="followUser" class="button is-outlined is-info mt-5" v-else>
                 follow
             </button>
 
@@ -112,6 +112,7 @@
 
 <script>
 import axios from "axios"
+import getCookie from '../../cookies/getCookie'
 // import getCookie from '../../cookies/getCookie.js'
 
 export default {
@@ -119,13 +120,14 @@ export default {
   data() {
     return {
         user: {},
+        isFollowing: false,
         showPosts: true,
         showLikes: false,
         
     }
   },
   computed: {
-      isFollowing() {
+      isFollowingCom() {
         if (this.$store.state.user.following.includes(this.user._id)) {
             return true
         }
@@ -133,6 +135,18 @@ export default {
       }
   },
   methods: {
+      async isFollowingCheck() {
+        if (this.$store.state.user.following.includes(this.user._id)) {
+            console.log("Checkpoint 1");
+            this.isFollowing = true
+        }
+        else {
+            this.isFollowing = false
+
+        }
+        
+
+      },
     async getUser() {
         try {
           const result = await axios.get(`http://localhost:5050/api/users/getByUsername?username=${this.$route.query.username}`)
@@ -142,6 +156,26 @@ export default {
             this.user = {}
             console.log(err);
         }
+    },
+    async followUser(e) {
+        e.preventDefault()
+        try {
+            await axios.post("http://localhost:5050/api/users/follow", 
+            {
+                following: this.user._id
+            },{
+                headers: {
+                    token: getCookie('token')
+                }
+            })
+            await this.getUser()
+            await this.$store.dispatch('userLoggedIn')
+            await this.isFollowingCheck()
+        }
+        catch(err) {
+            console.log(err);
+        }
+        this.isFollowing = true
     },
     showThePosts(e) {
       e.preventDefault()
@@ -159,7 +193,8 @@ export default {
   async mounted() {
       this.$store.dispatch('userLoggedIn')
       await this.getUser()
-      
+      await this.isFollowingCheck()
+      console.log(this.isFollowing);
   }
 }
 </script>
