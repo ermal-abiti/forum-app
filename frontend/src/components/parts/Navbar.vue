@@ -5,9 +5,14 @@
         <router-link class="navbar-item" to="/">
           Forum App
         </router-link>
+        <button v-bind:class="{ 'is-active': activator }" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarExampleTransparentExample" @click="makeBurger" >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
       </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div id="navbarExampleTransparentExample" class="navbar-menu" v-bind:class="{ 'is-active': activator }">
     <div class="navbar-start">
       <!-- <router-link class="navbar-item" to="/">Home</router-link> -->
       <router-link class="navbar-item" to="/posts">Posts</router-link>
@@ -44,6 +49,11 @@
 <script>
 export default {
     name: 'Navbar',
+    data() {
+      return {
+        activator: false
+      }
+    },
     methods: {
       logOut() {
         document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
@@ -51,6 +61,10 @@ export default {
         this.$store.dispatch('authCheck')
         this.$store.dispatch('userLoggedIn')
         this.$router.push('Login')
+      },
+      makeBurger () {
+        this.activator = !this.activator
+        return this.activator
       }
     }
 }
