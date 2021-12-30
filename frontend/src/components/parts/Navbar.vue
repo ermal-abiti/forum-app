@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-brand">
         <router-link class="navbar-item" to="/">
-          Forum App
+          <i class="fas fa-box"> Forum App</i>
         </router-link>
         <button v-bind:class="{ 'is-active': activator }" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarExampleTransparentExample" @click="makeBurger" >
           <span aria-hidden="true"></span>
