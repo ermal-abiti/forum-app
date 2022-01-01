@@ -157,14 +157,14 @@ router.post('/follow', auth, async (req, res) => {
 
     if (String(followerUser._id) !== String(followingUser._id)) {
         if (!(followerUser.following.includes(String(followingUser._id)))) {
-            followerUser.following.push(followingUser._id)
-            followingUser.followers.push(followerUser._id)
+            followerUser.following.push(followingUser._id);
+            followingUser.followers.push(followerUser._id);
     
             followerUser.save();
             followingUser.save();
         }
         else {
-            return res.json("User is already followed!")
+            return res.json("User is already followed!");
         }
         return res.json({
             data: {
@@ -176,5 +176,34 @@ router.post('/follow', auth, async (req, res) => {
     return res.send("You cannot follow yourself!");
 
 });
+
+router.post('/unfollow', auth, async (req, res) => {
+    const unfollowerUser = await User.findOne({ _id: req.user.user_id });
+    const unfollowingUser = await User.findOne({ _id: req.body.unfollowing });
+    console.log(req.body.unfollowing);
+    console.log(unfollowerUser);
+    console.log(unfollowingUser);
+
+    // if user is not trying to unfollow him/herself >>>>>>
+    if (String(unfollowerUser._id) !== String(unfollowingUser._id)) {
+        if (unfollowerUser.following.includes(String(unfollowingUser._id))) {
+            unfollowerUser.following = unfollowerUser.following.filter(id => String(id) !== String(unfollowingUser._id));
+            unfollowingUser.followers = unfollowingUser.followers.filter(id => String(id) !== String(unfollowerUser._id));
+
+            unfollowerUser.save();
+            unfollowingUser.save();
+        }
+        else {
+            return res.json("User is already unfollowed!")
+        }
+        return res.json({
+            data: {
+                follower: unfollowerUser,
+                following: unfollowingUser
+            }
+        });
+    }
+    return res.send("You cannot unfollow yourself!");
+})
 
 export default router;

@@ -21,7 +21,7 @@
            @{{ user.username }}
           </p>
           <div v-if="!(this.$store.state.user.username == user.username) && this.$store.state.loggedIn">
-            <button class="button is-info mt-5" v-if="isFollowing">
+            <button @click="unFollowUser" class="button is-info mt-5" v-if="isFollowing">
                 following
             </button>
             <button @click="followUser" class="button is-outlined is-info mt-5" v-else>
@@ -176,6 +176,26 @@ export default {
             console.log(err);
         }
         this.isFollowing = true
+    },
+    async unFollowUser(e) {
+        e.preventDefault()
+        try {
+            await axios.post("http://localhost:5050/api/users/unfollow", 
+            {
+                unfollowing: this.user._id
+            },{
+                headers: {
+                    token: getCookie('token')
+                }
+            })
+            await this.getUser()
+            await this.$store.dispatch('userLoggedIn')
+            await this.isFollowingCheck()
+        }
+        catch(err) {
+            console.log(err);
+        }
+        this.isFollowing = false
     },
     showThePosts(e) {
       e.preventDefault()
