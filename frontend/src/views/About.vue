@@ -1,8 +1,8 @@
 <template>
-<div>
+<div class="container mt-5">
 <div>
   
- <div class="tile is-ancestor ">
+ <div class="tile is-ancestor mt-5">
   <div class="tile is-parent ">
     <article class="tile is-child box">
       <p class="title">Kolona 1</p>
@@ -12,7 +12,7 @@
       </div>
     </article>
   </div>
-  <div class="tile is-parent">
+  <div class="tile is-parent ">
     <article class="tile is-child box">
       <p class="title">Kolona 2</p>
       <p class="subtitle">Kontenti</p>
@@ -21,7 +21,7 @@
       </div>
     </article>
   </div>
-  <div class="tile is-parent">
+  <div class="tile is-parent ">
     <article class="tile is-child box">
       <p class="title">Kolona 3</p>
       <p class="subtitle">Kontenti</p>
@@ -33,7 +33,7 @@
   </div>
 </div>
 </div>
-<section class="hero is-primary">
+<section class="hero is-primary mt-5">
   <div class="hero-body">
     <p class="title">
       Primary hero
@@ -44,7 +44,7 @@
   </div>
 </section>
 <div class="placeholderi">
-<div class="mesazhi is-size-2">
+<div class="mesazhi is-size-2 mt-5">
   <p><strong>Leave Us a Message</strong></p>
 </div>
 <textarea class="textarea is-large" placeholder="Type..."></textarea>
