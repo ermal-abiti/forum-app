@@ -35,7 +35,11 @@
 
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable" v-if="!($store.state.loggedIn)">
-          <a class="navbar-link">Account</a>
+          <a class="navbar-link">
+            <span class="icon">
+                <i class="fas fa-user"></i>
+            </span>
+          </a>
           <div class="navbar-dropdown is-boxed">
             <router-link class="navbar-item" to="/login">Login</router-link>
             <router-link class="navbar-item" to="/register">Register</router-link>
@@ -43,9 +47,14 @@
         </div>
 
         <div class="navbar-item has-dropdown is-hoverable" v-else>
-          <a class="navbar-link">{{ $store.state.user.username }}</a>
+          <a class="navbar-link">
+            <span class="icon">
+            <i class="fas fa-user
+              has-text-link"></i>
+            </span>{{ $store.state.user.username }}
+          </a>
           <div class="navbar-dropdown is-boxed">
-            <router-link class="navbar-item" to="/userprofile">My Profile</router-link>
+            <router-link class="navbar-item" to="/userprofile">{{ $store.state.user.fullName }}</router-link>
             <hr class="navbar-divider">
             <a class="navbar-item has-text-danger" @click="logOut">Logout</a>
           </div>
