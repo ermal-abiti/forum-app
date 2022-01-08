@@ -71,6 +71,14 @@ const routes = [
     name: 'Posts',
     component: Posts
   },
+  {
+    path: '/userprofile',
+    name: 'UserProfiles',
+    component: UserProfiles,
+    beforeEnter (to, from, next) {
+      loginTest(to, from, next)
+    }
+  },
 
 
 
@@ -83,14 +91,6 @@ const routes = [
 
 
   
-  {
-    path: '/userprofile',
-    name: 'UserProfiles',
-    component: UserProfiles,
-    beforeEnter (to, from, next) {
-      loginTest(to, from, next)
-    }
-  },
   {
     path: '/profile',
     name: 'SingleUser',
