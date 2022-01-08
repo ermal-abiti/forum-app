@@ -57,6 +57,25 @@
               <span>Posts</span>
             </a>
           </li>
+          
+          <li class='link'>
+            <a @click="showTheFollowers">
+              <span class='icon'>
+                <i class='fa fa-users'></i>
+              </span>
+              <span>Followers</span>
+            </a>
+          </li>
+
+          <li class='link'>
+            <a @click="showTheFollowing">
+              <span class='icon'>
+                <i class='fa fa-users'></i>
+              </span>
+              <span>Following</span>
+            </a>
+          </li>
+
           <li class='link'>
             <a @click="showTheLikes">
               <span class='icon'>
@@ -65,11 +84,13 @@
               <span>Likes</span>
             </a>
           </li>
+
         </ul>
       </div>
     </div>
+
     <!-- Posts -->
-      <div v-if="showPosts">
+      <div v-if="showPosts" class="mt-5">
             <div class='box' style='border-radius: 0px;' v-for="post in user.posts" v-bind:key="post._id">
                   <div class="media-content">
                     <div class="content">
@@ -95,6 +116,24 @@
 
             </div>
       </div>
+
+    <!-- Followers -->
+    <div v-if="showFollowers" class="mt-5">
+      <div class="container">
+        <div class="box" v-for="user in user.followers" :key="user._id">
+          <p><b>{{ user.fullName }}</b> - <a :href="`/profile?username=${user.username}`">@{{ user.username }}</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Followers -->
+    <div v-if="showFollowing" class="mt-5">
+      <div class="container">
+        <div class="box" v-for="user in user.following" :key="user._id">
+          <p><b>{{ user.fullName }}</b> - <a :href="`/profile?username=${user.username}`">@{{ user.username }}</a></p>
+        </div>
+      </div>
+    </div>
     
     </div>
   </div>
@@ -123,6 +162,8 @@ export default {
         isFollowing: false,
         showPosts: true,
         showLikes: false,
+        showFollowers: false,
+        showFollowing: false,
         
     }
   },
@@ -201,14 +242,32 @@ export default {
       e.preventDefault()
       this.showPosts = true
       this.showLikes = false
+      this.showFollowers = false
+      this.showFollowing = false
 
     },
     showTheLikes(e) {
       e.preventDefault()
       this.showLikes = true
       this.showPosts = false
+      this.showFollowers = false
+      this.showFollowing = false
 
     },
+    showTheFollowers(e) {
+      e.preventDefault()
+      this.showLikes = false
+      this.showPosts = false
+      this.showFollowers = true
+      this.showFollowing = false
+    },
+    showTheFollowing(e) {
+      e.preventDefault()
+      this.showLikes = false
+      this.showPosts = false
+      this.showFollowers = false
+      this.showFollowing = true
+    }
   },
   async mounted() {
       this.$store.dispatch('userLoggedIn')

@@ -48,13 +48,14 @@
 
         <div class="navbar-item has-dropdown is-hoverable" v-else>
           <a class="navbar-link">
-            <span class="icon">
+            <span class="icon mx-1">
             <i class="fas fa-user
-              has-text-link"></i>
-            </span>{{ $store.state.user.username }}
+              has-text-link"></i> 
+            </span> 
+            {{ $store.state.user.username }}
           </a>
           <div class="navbar-dropdown is-boxed">
-            <router-link class="navbar-item" to="/userprofile">{{ $store.state.user.fullName }}</router-link>
+            <a class="navbar-item" v-bind:href="`/profile?username=${$store.state.user.username}`">{{ $store.state.user.fullName }}</a>
             <hr class="navbar-divider">
             <a class="navbar-item has-text-danger" @click="logOut">Logout</a>
           </div>

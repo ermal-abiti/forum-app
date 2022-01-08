@@ -133,6 +133,24 @@ router.get('/getByUsername', async (req, res) => {
         console.log("e1");
         const user = await User.findOne({username: req.query.username});
         const posts = await Post.find({creator: user._id});
+        
+
+        let newFollowers = [];
+        let newFollowing = [];
+
+        for (let i=0; i<user.followers.length; i++) {
+            const u = await User.findOne({_id: user.followers[i]})
+            newFollowers.push(u);
+        }
+
+        for (let i=0; i<user.following.length; i++) {
+            const u = await User.findOne({_id: user.following[i]})
+            newFollowing.push(u);
+        }
+
+        user.followers = newFollowers;
+        user.following = newFollowing;
+
         const { _id, username, email, fullName, followers, following } = user;
         return res.status(200).json({
             _id,
@@ -205,5 +223,7 @@ router.post('/unfollow', auth, async (req, res) => {
     }
     return res.send("You cannot unfollow yourself!");
 })
+
+router.get('/')
 
 export default router;
