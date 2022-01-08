@@ -10,6 +10,7 @@ import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
 import SinglePost from '../components/posts/SinglePost.vue'
 
+import SingleUser from '../components/profiles/SingleUser.vue'
 
 Vue.use(VueRouter)
 
@@ -80,7 +81,24 @@ const routes = [
     path: '/singlepost',
     name: 'SinglePost',
     component: SinglePost
-  }
+  },
+
+
+
+
+
+
+
+
+
+
+
+  
+  {
+    path: '/profile',
+    name: 'SingleUser',
+    component: SingleUser
+  },
 ]
 
 const router = new VueRouter({

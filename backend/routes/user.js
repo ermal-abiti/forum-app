@@ -1,42 +1,13 @@
 import { Router } from "express";
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import jwtDecode from "jwt-decode";
-import { LocalStorage } from "node-localstorage";
 import auth from "../middleware/auth.js";
 import { ObjectId } from "mongodb";
 
 const router = Router();
 
-
-
-async function authenticate(req) {
-    const token = req.headers['token'];
-    try {
-        if (token) {
-            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-                if (decoded) {
-                    const user = await User.findOne({_id: decoded.user_id})
-                    const data = { auth: true, user: {
-                        _id: user._id,
-                        username: user.username
-                    } }
-                    return data;
-                }
-                else {
-                    return {auth: false}
-                }
-        }
-        else {
-            return {auth: false}
-        }
-    }
-    catch(err) {
-        return {auth:false}
-    }
-
-}
 
 router.post('/register', async (req, res) => {
     try {
@@ -128,22 +99,10 @@ router.get('/loggedin', (req, res) => {
     return res.send("No User is logged in")
 });
 
-// temp route
-router.get('/loggeduser', async (req, res) => {
-    if (req.cookies['token']) {
-        let token = req.cookies['token'];
-        let decoded = jwtDecode(token);
-        let user = await User.findOne({username: decoded.username});
 
-        return res.status(200).json({
-            id: user._id
-        });
-    }
-    res.send();
-});
 
 // ***for api use only
-router.post('/logout', async (req, res) => {
+router.post('/logout', auth, async (req, res) => {
     if (req.cookies['token'] && req.cookies['userid']) {
         return res.clearCookie('token').clearCookie('userid').status(200).send('Logged out successfully!');
     }
@@ -151,45 +110,120 @@ router.post('/logout', async (req, res) => {
     res.send("No cookies for auth found!");
 });
 
-router.get('/isloggedin', async (req, res) => {
-    const data = await authenticate(req)
-    try {
-        return res.json(data)
-    }
-    catch (err) {
-        return res.json({auth : false})
-    }
+router.get('/isloggedin', auth, async (req, res) => {
+    return res.json({auth: true})
 });
 
 router.get('/getLoggedUser', auth, async (req, res) => {
-    const data = await authenticate(req)
-    console.log(data);
-    if (data.user){
-        console.log("User defined");
-        const user = await User.findOne({_id: data.user._id});
-        return res.status(200).json({ 
-            _id: user._id,
-            fullName: user.fullName,
-            username: user.username,
-            email: user.email,
-        });
-    }
+    const user = await User.findOne({_id: req.user.user_id});
+    const posts = await Post.find({creator: user._id}).sort({"dateCreated": -1});
+    return res.status(200).json({ 
+        _id: user._id,
+        fullName: user.fullName,
+        username: user.username,
+        email: user.email,
+        followers: user.followers,
+        following: user.following,
+        posts: posts
+    });
 });
 
-router.get('/getUserById', async (req, res) => {
-    const userid = req.headers['userid'];
+router.get('/getByUsername', async (req, res) => {
     try {
-        const user = await User.findOne({_id: userid});
-        res.status(200).json({ 
-            user_id: user._id,
-            fullName: user.fullName,
-            username: user.username,
-            email: user.email,
+        console.log("e1");
+        const user = await User.findOne({username: req.query.username});
+        const posts = await Post.find({creator: user._id});
+        
+
+        let newFollowers = [];
+        let newFollowing = [];
+
+        for (let i=0; i<user.followers.length; i++) {
+            const u = await User.findOne({_id: user.followers[i]})
+            newFollowers.push(u);
+        }
+
+        for (let i=0; i<user.following.length; i++) {
+            const u = await User.findOne({_id: user.following[i]})
+            newFollowing.push(u);
+        }
+
+        user.followers = newFollowers;
+        user.following = newFollowing;
+
+        const { _id, username, email, fullName, followers, following } = user;
+        return res.status(200).json({
+            _id,
+            username,
+            email,
+            fullName,
+            followers,
+            following,
+            posts
         });
-    } catch (error) {
-        console.log(error.message);
+    }
+    catch(err) {
+        res.status(400).send("user not found");
     }
 });
 
+
+// user followers system
+router.post('/follow', auth, async (req, res) => {
+    const followerUser = await User.findOne({ _id: req.user.user_id });
+    const followingUser = await User.findOne({ _id: req.body.following });
+
+    if (String(followerUser._id) !== String(followingUser._id)) {
+        if (!(followerUser.following.includes(String(followingUser._id)))) {
+            followerUser.following.push(followingUser._id);
+            followingUser.followers.push(followerUser._id);
+    
+            followerUser.save();
+            followingUser.save();
+        }
+        else {
+            return res.json("User is already followed!");
+        }
+        return res.json({
+            data: {
+                follower: followerUser,
+                following: followingUser
+            }
+        });
+    }
+    return res.send("You cannot follow yourself!");
+
+});
+
+router.post('/unfollow', auth, async (req, res) => {
+    const unfollowerUser = await User.findOne({ _id: req.user.user_id });
+    const unfollowingUser = await User.findOne({ _id: req.body.unfollowing });
+    console.log(req.body.unfollowing);
+    console.log(unfollowerUser);
+    console.log(unfollowingUser);
+
+    // if user is not trying to unfollow him/herself >>>>>>
+    if (String(unfollowerUser._id) !== String(unfollowingUser._id)) {
+        if (unfollowerUser.following.includes(String(unfollowingUser._id))) {
+            unfollowerUser.following = unfollowerUser.following.filter(id => String(id) !== String(unfollowingUser._id));
+            unfollowingUser.followers = unfollowingUser.followers.filter(id => String(id) !== String(unfollowerUser._id));
+
+            unfollowerUser.save();
+            unfollowingUser.save();
+        }
+        else {
+            return res.json("User is already unfollowed!")
+        }
+        return res.json({
+            data: {
+                follower: unfollowerUser,
+                following: unfollowingUser
+            }
+        });
+    }
+    return res.send("You cannot unfollow yourself!");
+})
+
+router.get('/')
 
 export default router;

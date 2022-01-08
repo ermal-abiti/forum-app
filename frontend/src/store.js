@@ -41,9 +41,7 @@ const mutations = {
     // get all posts - mutation
     async getAllPosts(state) {
         const result = await axios.get('http://localhost:5050/api/posts', authHeaders)
-        console.log("Store.js: ", result);
         state.posts = result.data
-        console.log("state.posts: ", state.posts);
     },
 
     userLogOut (state) {

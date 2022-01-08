@@ -18,8 +18,11 @@ export default async function isAuth() {
                 "token": getCookie("token")
             }
         })
-        let auth = result.data.auth
-        return auth
+        if (result.data.auth) {
+            return result.data.auth
+
+        }
+        return {auth: false}
     }
     catch (err){
         return false
