@@ -121,7 +121,8 @@
     <div v-if="showFollowers" class="mt-5">
       <div class="container">
         <div class="box" v-for="user in user.followers" :key="user._id">
-          <p><b>{{ user.fullName }}</b> - <a :href="`/profile?username=${user.username}`">@{{ user.username }}</a></p>
+          <p><a :href="`/profile?username=${user.username}`" class="has-text-black"><b>{{ user.fullName }}</b></a></p>
+          <p><a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a></p>
         </div>
       </div>
     </div>
@@ -130,7 +131,8 @@
     <div v-if="showFollowing" class="mt-5">
       <div class="container">
         <div class="box" v-for="user in user.following" :key="user._id">
-          <p><b>{{ user.fullName }}</b> - <a :href="`/profile?username=${user.username}`">@{{ user.username }}</a></p>
+          <p><a :href="`/profile?username=${user.username}`" class="has-text-black"><b>{{ user.fullName }}</b></a></p>
+          <p><a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a></p>
         </div>
       </div>
     </div>
