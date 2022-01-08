@@ -70,6 +70,18 @@ const routes = [
     name: 'Posts',
     component: Posts
   },
+
+
+
+
+
+
+
+
+
+
+
+  
   {
     path: '/userprofile',
     name: 'UserProfiles',
