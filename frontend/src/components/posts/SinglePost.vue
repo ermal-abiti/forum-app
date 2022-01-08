@@ -1,4 +1,5 @@
 <template>
+<div class="container mt-5">
     <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
@@ -82,4 +83,5 @@
     </article>
   </div>
 </article>
+</div>
 </template>
