@@ -82,18 +82,6 @@ const routes = [
     name: 'SinglePost',
     component: SinglePost
   },
-
-
-
-
-
-
-
-
-
-
-
-  
   {
     path: '/profile',
     name: 'SingleUser',
