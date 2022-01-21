@@ -14,7 +14,14 @@ npm install
 npm run dev
 ```
 
-2. Frontend setup
+2. .env variables
+Create an .env file in backend folder. It should look like this:
+```
+MONGO_URI={mongo db connection string}
+TOKEN_KEY=someJWTAuthenticationKey
+```
+
+3. Frontend setup
 ```
 cd frontend
 npm install
