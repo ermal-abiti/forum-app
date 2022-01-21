@@ -38,15 +38,21 @@ const mutations = {
         state.user = result.data
     
     },
-    // get all posts - mutation
+
     async getAllPosts(state) {
         const result = await axios.get('http://localhost:5050/api/posts', authHeaders)
+        state.posts = result.data
+    },
+
+    async getFollowingsPosts(state) {
+        const result = await axios.get('http://localhost:5050/api/followingPosts', authHeaders);
         state.posts = result.data
     },
 
     userLogOut (state) {
         state.loggedIn = false
     },
+
     userLogIn (state) {
         state.loggedIn = true
     }
@@ -58,6 +64,7 @@ const actions = {
     userLogIn: ({commit})=> commit('userLogIn'),
     userLoggedIn: ({commit})=> commit('userLoggedIn'),
     getAllPosts: ({commit})=> commit('getAllPosts'),
+    getFollowingsPosts: ({commit})=> commit('getFollowingsPosts'),
 }
 export default new Vuex.Store({
     state,

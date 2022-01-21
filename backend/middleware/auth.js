@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 import { config as cnf } from "dotenv";
 
-const localStorage = new LocalStorage('./');
-
 cnf();
 
 const config = process.env;

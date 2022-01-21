@@ -5,7 +5,8 @@ import {
     getPostById,
     updatePost,
     addPost,
-    deletePost
+    deletePost,
+    getFollowingPosts
 } from "../controllers/PostController.js";
 
 const router = Router();
@@ -16,4 +17,6 @@ router.post('/addpost', auth, addPost);
 router.get('/post/:postid', getPostById);
 router.put('/post/:postid', updatePost);
 router.delete('/post/:postid', deletePost);
+router.get('/followingPosts', auth, getFollowingPosts);
+
 export default router;

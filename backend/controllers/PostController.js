@@ -68,3 +68,25 @@ export async function deletePost (req, res) {
         console.log(err);
     }
 }
+
+export async function getFollowingPosts (req, res) {
+    try {
+        const user = await User.findOne({_id: req.user.user_id});
+        const result = await Post.find({}).sort({"dateCreated": -1});
+        let newResult = [];
+        
+        for (let i =0; i<result.length; i++){
+            for (let j =0; j<user.following.length; i++){
+                console.log(result[i]);
+                console.log(following[j]);
+            }
+            // if (result[i].creator == user._id) {
+            //     result[i].creator = await User.findOne({_id: result[i].creator})
+            //     newResult.push(result[i]);
+            // }
+        }
+        return res.status(200).json(newResult);
+    } catch (err) {
+        return err.message;
+    }
+}
