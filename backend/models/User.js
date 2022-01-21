@@ -43,7 +43,7 @@ const userSchema = mongoose.Schema({
     ],
 }, {version: 0})
 
-mongoose.connect("mongodb://localhost:27017/forumAppDb");
+mongoose.connect(process.env.MONGO_URI);
 const User = mongoose.model("User", userSchema);
 
 export default User;
