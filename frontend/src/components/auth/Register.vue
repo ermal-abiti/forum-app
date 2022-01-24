@@ -78,7 +78,7 @@ export default {
         loginMethod(e) {
             e.preventDefault();
             try {
-                axios.post("http://localhost:5050/api/users/register", 
+                axios.post(process.env.VUE_APP_API_URL + "/users/register", 
                     {
                     username: e.target.username.value,
                     fullName: e.target.fullName.value,

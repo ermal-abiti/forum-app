@@ -54,7 +54,7 @@ export default {
                 title: e.target.title.value,
                 content: e.target.content.value,
             }
-            axios.post("http://localhost:5050/api/addpost", data,  {
+            axios.post(process.env.VUE_APP_API_URL + "/addpost", data,  {
                 headers: {
                     'userid': getCookie('userid'),
                     'token': getCookie('token'),

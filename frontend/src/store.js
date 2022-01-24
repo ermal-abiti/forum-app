@@ -30,7 +30,7 @@ const mutations = {
         })
     },
     async userLoggedIn(state) {
-        const result = await axios.get('http://localhost:5050/api/users/getLoggedUser', {
+        const result = await axios.get(process.env.VUE_APP_API_URL + '/users/getLoggedUser', {
                 headers: {
                     token: getCookie('token')
                 }
@@ -40,12 +40,12 @@ const mutations = {
     },
 
     async getAllPosts(state) {
-        const result = await axios.get('http://localhost:5050/api/posts', authHeaders)
+        const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', authHeaders)
         state.posts = result.data
     },
 
     async getFollowingsPosts(state) {
-        const result = await axios.get('http://localhost:5050/api/followingPosts', authHeaders);
+        const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', authHeaders);
         state.posts = result.data
     },
 

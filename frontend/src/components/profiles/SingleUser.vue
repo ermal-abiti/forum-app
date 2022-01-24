@@ -203,7 +203,7 @@ export default {
     async followUser(e) {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:5050/api/users/follow", 
+            await axios.post(process.env.VUE_APP_API_URL + "/api/users/follow", 
             {
                 following: this.user._id
             },{
@@ -223,7 +223,7 @@ export default {
     async unFollowUser(e) {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:5050/api/users/unfollow", 
+            await axios.post(process.env.VUE_APP_API_URL + "/users/unfollow", 
             {
                 unfollowing: this.user._id
             },{

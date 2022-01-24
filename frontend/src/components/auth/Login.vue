@@ -67,7 +67,8 @@ export default {
         loginMethod(e) {
             e.preventDefault();
             try {
-                axios.post("http://localhost:5050/api/users/login", 
+                console.log("process.env.apiurl: ", process.env.VUE_APP_API_URL);
+                axios.post(process.env.VUE_APP_API_URL + "/users/login", 
                     {
                     username: e.target.username.value, 
                     password: e.target.password.value
