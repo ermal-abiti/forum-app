@@ -20,6 +20,10 @@ Create an .env file in backend folder. It should look like this:
 MONGO_URI={mongo db connection string}
 TOKEN_KEY=someJWTAuthenticationKey
 ```
+Create another .env file in frontend folder. It should look like this (only if backend is running locally):
+```
+VUE_APP_API_URL=http://localhost:5050/api
+```
 
 3. Frontend setup
 ```
