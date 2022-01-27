@@ -14,7 +14,8 @@ const authHeaders = {
 const state = {
     loggedIn: false,
     user: "",
-    posts: []
+    posts: [],
+    followingPosts: [],
 }
 
 const getters = {
@@ -46,9 +47,9 @@ const mutations = {
     },
 
     async getFollowingsPosts(state) {
-        state.posts = []
+        state.followingPosts = []
         const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', authHeaders);
-        state.posts = result.data
+        state.followingPosts = result.data
     },
 
     userLogOut (state) {

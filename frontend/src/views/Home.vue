@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
         <!-- <add-post v-if="this.$store.state.loggedIn"/> -->
-        <article class="media mt-5" v-for="post in this.$store.state.posts" v-bind:key="post._id">
+        <article class="media mt-5" v-for="post in this.$store.state.followingPosts" v-bind:key="post._id">
             <figure class="media-left">
                 <p class="image is-64x64">
                 <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -45,7 +45,6 @@ export default {
   mounted() {
     this.$store.dispatch('authCheck');
     this.$store.dispatch('getFollowingsPosts');
-    console.log(this.$store.state.posts);
   }
 }
 </script>
