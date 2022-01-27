@@ -73,17 +73,21 @@ export async function getFollowingPosts (req, res) {
     try {
         const user = await User.findOne({_id: req.user.user_id});
         const followingUsers = [];
+
         for (let i = 0; i < user.following.length; i++) {
             followingUsers.push(user.following[i]);
         }
+        
+        const posts = await Post.find({
+            creator: { $in: followingUsers }
+        }).sort({"dateCreated": -1});
+        
+        for (let i = 0; i < posts.length; i++) {
+            const creator = await User.findOne({_id: posts[i].creator});
+            posts[i].creator = creator
+        }
 
-        console.log("following users: ", followingUsers);
-        
-        const posts = await Post.find({}).sort({"dateCreated": -1});
-        
-        
-
-        return res.status(200).json(followingUsers);
+        return res.status(200).json(posts);
     } catch (err) {
         return res.json({ error: err.message })
     }

@@ -79,6 +79,9 @@ export default {
                     document.cookie = `userid=${res.data.userid}`
                     this.$store.dispatch('authCheck')
                     this.$store.dispatch('userLoggedIn')
+                    this.$store.state.posts = []
+                    this.$store.dispatch('getFollowingsPosts')
+
                     this.$router.push({path:'/'})
                 })
                 .catch(err => {
