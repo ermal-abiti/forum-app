@@ -40,11 +40,13 @@ const mutations = {
     },
 
     async getAllPosts(state) {
+        state.posts = []
         const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', authHeaders)
         state.posts = result.data
     },
 
     async getFollowingsPosts(state) {
+        state.posts = []
         const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', authHeaders);
         state.posts = result.data
     },

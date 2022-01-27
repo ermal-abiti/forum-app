@@ -192,7 +192,7 @@ export default {
       },
     async getUser() {
         try {
-          const result = await axios.get(`http://localhost:5050/api/users/getByUsername?username=${this.$route.query.username}`)
+          const result = await axios.get(`${process.env.VUE_APP_API_URL}/users/getByUsername?username=${this.$route.query.username}`)
           this.user = result.data
         }
         catch(err) {
@@ -203,7 +203,7 @@ export default {
     async followUser(e) {
         e.preventDefault()
         try {
-            await axios.post(process.env.VUE_APP_API_URL + "/api/users/follow", 
+            await axios.post(process.env.VUE_APP_API_URL + "/users/follow", 
             {
                 following: this.user._id
             },{
