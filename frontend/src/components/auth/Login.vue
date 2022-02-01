@@ -6,9 +6,7 @@
             </div>
         </article>
         <div class="columns mt-5">
-            <div class="column is-one-third"></div>
-            <div class="column is-one-third">
-                <div class="card">
+            <div class="card">
                     <div class="card-content title">
                         <p class="title">Already a member ?</p>
                         <p class="subtitle">Log In to continue...</p>
@@ -51,8 +49,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="column is-one-third"></div>
+            
         </div>
 
     </div>
@@ -100,5 +97,7 @@ export default {
 </script>
 
 <style>
-
+.columns{
+    justify-content: center;
+}
 </style>

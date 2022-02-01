@@ -5,20 +5,14 @@
 <!-- Form Name -->
 <legend></legend>
 
-<!-- Text input-->
-<div class="field">
-  <label class="label" for="title">Title</label>
-  <div class="control">
-    <input v-model="title" id="title" name="title" type="text" placeholder="Whats on your mind..." class="input " required="">
-    
-  </div>
-</div>
+<!--
+-->
 
 <!-- Textarea -->
 <div class="field">
   <label class="label" for="content">Content</label>
   <div class="control">                     
-    <textarea v-model="content" class="textarea" id="content" name="content"></textarea>
+    <textarea v-model="content" class="textarea" id="content" placeholder="What's on your mind?" name="content"></textarea>
   </div>
 </div>
 
@@ -73,5 +67,7 @@ export default {
 </script>
 
 <style>
-
+.control{
+  text-align: end;
+}
 </style>
