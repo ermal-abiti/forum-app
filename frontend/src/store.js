@@ -21,6 +21,9 @@ const getters = {
 }
 
 const mutations = {
+    async setToken(state) {
+        state.token = getCookie('token')
+    },
     authCheck (state) {
         isAuth().then(res=>{
             state.loggedIn = res
@@ -71,6 +74,7 @@ const mutations = {
 }
 
 const actions = {
+    setToken: ({commit})=> commit('setToken'),
     authCheck: ({commit})=> commit('authCheck'),
     userLogOut: ({commit})=> commit('userLogOut'),
     userLogIn: ({commit})=> commit('userLogIn'),

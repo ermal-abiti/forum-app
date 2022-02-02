@@ -13,9 +13,11 @@ export default {
   components: {
     Navbar
   },
-  created() {
-    this.$store.dispatch('authCheck')
-    this.$store.dispatch('userLoggedIn')
+  async created() {
+    await this.$store.dispatch('setToken')
+    await this.$store.dispatch('authCheck')
+    await this.$store.dispatch('userLoggedIn')
+
   },
 }
 </script>

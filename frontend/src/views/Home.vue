@@ -4,14 +4,14 @@
         <article class="media mt-5" v-for="post in this.$store.state.followingPosts" v-bind:key="post._id">
             <figure class="media-left">
                 <p class="image is-64x64">
-                <img src="https://bulma.io/images/placeholders/128x128.png">
+                <img src="../components/profiles/default-avatar.png">
                 </p>
             </figure>
             
             <div class="media-content">
                 <div class="content">
                 <p>
-                    <strong>{{ post.creator.fullName }}</strong> <small>@{{ post.creator.username }}</small> <small>{{ post.dateCreated.slice(0,10) }}</small>
+                    <strong>{{ post.creator.fullName }}</strong> <small><a :href="`/profile?username=${post.creator.username}`">@{{ post.creator.username }}</a></small> <small>{{ post.dateCreated.slice(0,10) }}</small>
                     <br>
                     {{ post.content }}
                 </p>
