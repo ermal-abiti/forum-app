@@ -38,6 +38,7 @@ const mutations = {
                 }
             })
         state.user = result.data
+        console.log()
         state.token = getCookie('token')
     
     },

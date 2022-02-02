@@ -57,6 +57,7 @@
 
 <script>
 import axios from "axios"
+import getCookie from "../../cookies/getCookie.js"
 
 export default {
     name: "Login",
@@ -74,6 +75,7 @@ export default {
                     // console.log(res.data.token);
                     document.cookie = `token=${res.data.token}`
                     document.cookie = `userid=${res.data.userid}`
+                    this.$store.state.token = getCookie('token')
                     this.$store.dispatch('authCheck')
                     this.$store.dispatch('userLoggedIn')
                     this.$store.dispatch('getFollowingsPosts')
