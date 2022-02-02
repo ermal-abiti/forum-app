@@ -52,6 +52,10 @@ const mutations = {
         state.followingPosts = result.data
     },
 
+    async emptyFollowingPosts(state) {
+        state.followingPosts = []
+    },
+
     userLogOut (state) {
         state.loggedIn = false
     },
@@ -68,6 +72,7 @@ const actions = {
     userLoggedIn: ({commit})=> commit('userLoggedIn'),
     getAllPosts: ({commit})=> commit('getAllPosts'),
     getFollowingsPosts: ({commit})=> commit('getFollowingsPosts'),
+    emptyFollowingPosts: ({commit})=> commit('emptyFollowingPosts'),
 }
 export default new Vuex.Store({
     state,

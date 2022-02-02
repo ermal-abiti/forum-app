@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5" v-if="this.$store.state.loggedIn">
         <!-- <add-post v-if="this.$store.state.loggedIn"/> -->
         <article class="media mt-5" v-for="post in this.$store.state.followingPosts" v-bind:key="post._id">
             <figure class="media-left">
@@ -35,6 +35,9 @@
             </div>
         </article>
   </div>
+  <div class="container mt-5" v-else>
+    <h2>Featured</h2>
+  </div>
 </template>
 
 <script>
@@ -42,9 +45,9 @@ export default {
   name: 'Home',
   components: {
   },
-  mounted() {
-    this.$store.dispatch('authCheck');
-    this.$store.dispatch('getFollowingsPosts');
-  }
+  async mounted() {
+    await this.$store.dispatch('authCheck');
+    await this.$store.dispatch('getFollowingsPosts');
+  },
 }
 </script>

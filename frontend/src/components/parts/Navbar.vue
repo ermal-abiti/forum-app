@@ -78,7 +78,7 @@ export default {
       logOut() {
         document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
         this.$store.state.user = ""
-        this.$store.state.followingPosts = []
+        this.$store.dispatch('emptyFollowingPosts')
         this.$store.dispatch('authCheck')
         this.$store.dispatch('userLoggedIn')
         this.$router.push('Login')
