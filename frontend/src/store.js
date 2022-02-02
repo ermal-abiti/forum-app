@@ -6,11 +6,6 @@ import getCookie from "./cookies/getCookie.js"
 
 Vue.use(Vuex)
 
-// const authHeaders = {
-//     headers: {
-//         token: state.token
-//     }
-// }
 const state = {
     loggedIn: false,
     user: "",
@@ -38,7 +33,6 @@ const mutations = {
                 }
             })
         state.user = result.data
-        console.log()
         state.token = getCookie('token')
     
     },

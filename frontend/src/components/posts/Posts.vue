@@ -30,8 +30,8 @@
                 </div>
                 </nav>
             </div>
-            <div class="media-right">
-                <button class="delete"></button>
+            <div class="media-right" v-if="post.creator.username === $store.state.user.username">
+                <button class="delete" @click.prevent="deletePost(post._id)">s</button>
             </div>
         </article>
     </div>
@@ -39,6 +39,8 @@
 
 <script>
 import AddPost from "./AddPost.vue"
+import getCookie from "../../cookies/getCookie.js"
+import axios from "axios"
 
 export default {
     name: 'Posts',
@@ -47,6 +49,19 @@ export default {
     },
     mounted() {
         this.$store.dispatch('getAllPosts')
+    },
+    methods: {
+        async deletePost(id) {
+            if (confirm("Are you sure u wanna delete this post ?")) {
+                await axios.delete(process.env.VUE_APP_API_URL + `/post/${id}`, {
+                    headers: {
+                        token: getCookie('token')
+                    }
+                })
+                this.$store.dispatch('getAllPosts')
+            }
+        }
+
     }
 }
 </script>

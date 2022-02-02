@@ -113,7 +113,6 @@
                           </a>
                       </div>
                     </div>
-
             </div>
       </div>
 
@@ -141,6 +140,10 @@
   </div>
 </div>
 
+<div v-else-if="loading" class="container">
+  Loading...
+</div>
+
 <div v-else class="container mt-5">
     <article class="message is-danger">
     <div class="message-body">
@@ -166,6 +169,7 @@ export default {
         showLikes: false,
         showFollowers: false,
         showFollowing: false,
+        loading: false,
         
     }
   },
@@ -194,10 +198,14 @@ export default {
         try {
           const result = await axios.get(`${process.env.VUE_APP_API_URL}/users/getByUsername?username=${this.$route.query.username}`)
           this.user = result.data
+          
         }
         catch(err) {
             this.user = {}
             console.log(err);
+        }
+        finally {
+          this.loading = false
         }
     },
     async followUser(e) {
@@ -272,6 +280,7 @@ export default {
     }
   },
   async mounted() {
+      this.loading = true
       this.$store.dispatch('userLoggedIn')
       await this.getUser()
       await this.isFollowingCheck()
