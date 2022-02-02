@@ -6,16 +6,17 @@ import getCookie from "./cookies/getCookie.js"
 
 Vue.use(Vuex)
 
-const authHeaders = {
-    headers: {
-        token: getCookie('token')
-    }
-}
+// const authHeaders = {
+//     headers: {
+//         token: state.token
+//     }
+// }
 const state = {
     loggedIn: false,
     user: "",
     posts: [],
     followingPosts: [],
+    token: ""
 }
 
 const getters = {
@@ -37,18 +38,27 @@ const mutations = {
                 }
             })
         state.user = result.data
+        state.token = getCookie('token')
     
     },
 
     async getAllPosts(state) {
         state.posts = []
-        const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', authHeaders)
+        const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', {
+            headers: {
+                token: state.token
+            }
+        })
         state.posts = result.data
     },
 
     async getFollowingsPosts(state) {
         state.followingPosts = []
-        const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', authHeaders);
+        const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', {
+            headers: {
+                token: state.token
+            }
+        });
         state.followingPosts = result.data
     },
 
