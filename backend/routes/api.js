@@ -8,6 +8,10 @@ import {
     deletePost,
     getFollowingPosts
 } from "../controllers/PostController.js";
+import { 
+    getAllComments,
+    addComment
+} from "../controllers/CommentController.js";
 
 const router = Router();
 
@@ -18,5 +22,9 @@ router.get('/post/:postid', getPostById);
 router.put('/post/:postid', updatePost);
 router.delete('/post/:postid', deletePost);
 router.get('/followingPosts', auth, getFollowingPosts);
+
+// Comment Routes
+router.get('/comments', getAllComments);
+router.post('/comment', addComment);
 
 export default router;

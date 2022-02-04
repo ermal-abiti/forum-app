@@ -21,6 +21,11 @@ app.use('/api', apiRoutes);
 // Authentication endpoints
 app.use('/api/users',authRoutes);
 
+//not found endpoints
+app.use('*', (req, res, next) => {
+    return res.status(404).json({ message: 'Page Not Found!'});
+});
+
 const PORT = 5050;
 
 app.listen(PORT, () => console.log(`API Running on http://localhost:${PORT}`));
