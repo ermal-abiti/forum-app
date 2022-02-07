@@ -102,7 +102,7 @@
                     </div>
                     <!-- Icons -->
                       <div class="level-left">
-                          <a class="level-item">
+                          <a class="level-item" :href="`/singlepost?postid=${post._id}`">
                           <span class="icon is-small"><i class="fas fa-reply"></i></span>
                           </a>
                           <a class="level-item">

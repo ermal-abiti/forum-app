@@ -21,8 +21,18 @@ export async function getAllPosts (req, res) {
 
 export async function getPostById (req, res) {
     try {
-        const result = await Post.findOne({ _id: ObjectId(req.params.postid)});
-        return res.status(200).json(result);
+        const post = await Post.findOne({ _id: ObjectId(req.query.postid)});
+        const creator = await User.findById(post.creator);
+        const comments = await Comment.find({ post: ObjectId(req.query.postid) });
+
+        for (let i = 0; i < comments.length; i++) {
+            comments[i].creator = await User.findById(comments[i].creator);
+        }
+
+        post.comments = comments;
+        post.creator = creator;
+        
+        return res.status(200).json(post);
     }
     catch (err) {
         console.log(err);

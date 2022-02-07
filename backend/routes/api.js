@@ -18,13 +18,13 @@ const router = Router();
 // Post Routes
 router.get('/posts', getAllPosts);
 router.post('/addpost', auth, addPost);
-router.get('/post/:postid', getPostById);
+router.get('/post/', getPostById);
 router.put('/post/:postid', updatePost);
 router.delete('/post/:postid', deletePost);
 router.get('/followingPosts', auth, getFollowingPosts);
 
 // Comment Routes
 router.get('/comments', getAllComments);
-router.post('/comment', addComment);
+router.post('/comment', auth, addComment);
 
 export default router;

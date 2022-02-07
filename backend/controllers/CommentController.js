@@ -15,13 +15,22 @@ export const getAllComments = async (req, res, next) => {
 
 export const addComment = async (req, res, next) => {
     try {
+        if (!(req.query.postid)) {
+            throw new Error("Post with the given id does not exists");
+        }
+        
         const data = req.body;
 
-        data.dateCreated = new Date().toISOString();
-        // const userId = req.cookies['userid'] || req.headers['userid'];
 
-        data.creator = await User.findOne({username: 'ermalabiti'});
-        data.post = await Post.findOne({_id: '61fcf7e04105275b5f5f0ed1'});
+        data.dateCreated = new Date().toISOString();
+
+        data.creator = await User.findOne({_id: req.user.user_id});
+        data.post = await Post.findOne({_id: req.query.postid });
+        
+        if (!(data.post)) {
+            throw new Error("Post with the given id does not exists");
+        }
+
         const newComment = new Comment(data);
 
         const error = newComment.validateSync();
