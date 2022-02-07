@@ -1,8 +1,6 @@
 <template>
     <div class="container mt-5">
         <div class="columns mt-5">
-            <div class="column is-one-third"></div>
-            <div class="column is-one-third">
                 <div class="card">
                     <div class="card-content title">
                         <p class="title">Not a member ?</p>
@@ -62,8 +60,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="column is-one-third"></div>
         </div>
 
     </div>
