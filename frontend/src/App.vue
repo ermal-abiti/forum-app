@@ -11,7 +11,7 @@ import Navbar from './components/parts/Navbar.vue'
 export default {
   name: 'App',
   components: {
-    Navbar
+    Navbar,
   },
   async created() {
     await this.$store.dispatch('setToken')

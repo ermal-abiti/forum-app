@@ -4,6 +4,7 @@ import authRoutes from "./routes/user.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import dashboardRoutes from "./routes/dashboard.js";
 
 dotenv.config();
 

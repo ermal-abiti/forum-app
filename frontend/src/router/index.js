@@ -9,6 +9,7 @@ import store from '../store.js'
 import Posts from '../components/posts/Posts.vue'
 import UserProfiles from '../components/profiles/UserProfiles.vue'
 import SinglePost from '../components/posts/SinglePost.vue'
+import Dashboard from '../components/parts/Dashboard.vue'
 
 import SingleUser from '../components/profiles/SingleUser.vue'
 
@@ -86,6 +87,11 @@ const routes = [
     path: '/profile',
     name: 'SingleUser',
     component: SingleUser
+  },
+  {
+    path:'/dashboard',
+    name: 'Dashboard',
+    component: Dashboard 
   },
 ]
 

@@ -8,7 +8,7 @@
         <!-- Profile content -->
         <div class='column is-2'>
           <span class='header-icon user-profile-image'>
-            <img class="imgprofile" src='./avatarr.png' >
+            <img class="imgprofile" >
           </span>
         </div>
         <!-- Name and Bio -->
