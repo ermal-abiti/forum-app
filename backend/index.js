@@ -19,6 +19,9 @@ app.use(cors());
 // Api Endpoints
 app.use('/api', apiRoutes);
 
+// Dashboard Endpoints
+app.use('/dashboard', dashboardRoutes);
+
 // Authentication endpoints
 app.use('/api/users',authRoutes);
 

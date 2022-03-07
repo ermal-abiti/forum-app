@@ -41,12 +41,10 @@ const userSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId, ref: 'User'
         }
     ],
-    role:[
-        {
+    role: {
             type: String, 
             required: true
-        }
-    ]
+    }
 }, {version: 0})
 
 mongoose.connect(process.env.MONGO_URI);
