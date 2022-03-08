@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import router from "../routes/dashboard.js";
 
 
-//get ALL USERS, getfullName, getEmail, getUsername, getRole, getFollowers, getFollowing, 
+//get ALL USERS, getfullName, getEmail, getUsername, getRole, 
 export const getUsers = async (req, res, next) => {
     try {
         const result = await User.find({});

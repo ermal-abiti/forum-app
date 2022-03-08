@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     email: {
         type: String,
@@ -22,24 +22,29 @@ const userSchema = mongoose.Schema({
     },
     dateCreated: {
         type: Date,
-        required: true
+        required: true,
+        select: false
     },
     token: {
         type: String,
+        select: false
     },
     posts: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'Post'
+            type: mongoose.Schema.Types.ObjectId, ref: 'Post',
+            select: false
         }
     ],
     followers: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'User'
+            type: mongoose.Schema.Types.ObjectId, ref: 'User',
+            select: false
         }
     ],
     following: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'User'
+            type: mongoose.Schema.Types.ObjectId, ref: 'User',
+            select:false
         }
     ],
     role: {
