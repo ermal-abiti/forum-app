@@ -23,3 +23,13 @@ export async function updateUser(req, res) {
         throw new error(err);
     }
 }
+
+export async function deleteUser (req, res) {
+    try {
+        await User.deleteOne({_id: req.params.id}, req.body);
+        
+        return res.send("Post deleted successfully");
+    } catch (err) {
+        console.log(err);
+    }
+}
