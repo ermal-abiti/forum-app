@@ -1,19 +1,7 @@
-import { Router } from "express";
-import auth from "../middleware/auth.js";
-import {
-    getAllPosts,
-    getPostById,
-    updatePost,
-    addPost,
-    deletePost,
-    getFollowingPosts
-} from "../controllers/PostController.js";
-import { 
-    getAllComments,
-    addComment,
-    deleteComment
-} from "../controllers/CommentController.js";
-
+import { Router } from 'express';
+import auth from '../middleware/auth.js';
+import { getAllPosts, getPostById, updatePost, addPost, deletePost, getFollowingPosts } from '../controllers/PostController.js';
+import { getAllComments, addComment, deleteComment } from '../controllers/CommentController.js';
 
 const router = Router();
 
