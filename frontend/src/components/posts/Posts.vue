@@ -28,7 +28,7 @@
                 </div>
                 </nav>
             </div>
-            <div class="media-right" v-if="post.creator.username === $store.state.user.username">
+            <div class="media-right" v-if="post.creator.username === $store.state.user.username || true">
                 <button class="delete" @click.prevent="deletePost(post._id)">s</button>
             </div>
         </article>

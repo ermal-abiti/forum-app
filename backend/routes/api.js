@@ -22,7 +22,7 @@ router.get('/posts', getAllPosts);
 router.post('/addpost', auth, addPost);
 router.get('/post/', getPostById);
 router.put('/post/:postid', updatePost);
-router.delete('/post/:postid', deletePost);
+router.delete('/post/:postid', auth, deletePost);
 router.get('/followingPosts', auth, getFollowingPosts);
 
 // Comment Routes

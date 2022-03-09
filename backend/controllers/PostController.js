@@ -73,11 +73,26 @@ export async function updatePost (req, res) {
 
 export async function deletePost (req, res) {
     try {
-        const deleteResult = await Post.deleteOne({_id: ObjectId(req.params.postid)});
-        console.log(deleteResult);
-        return res.send("Post deleted successfully");
+        const post = await Post.findOne({_id: req.params.postid});
+        
+        if (!post) {
+            throw new Error("No post found with that id");
+        }
+
+        //* check if the user logged in has the same id of the user who created the post
+        if (post.creator.toString() === req.user.user_id.toString()) {
+            post.remove();
+
+            //cascade comments
+            await Comment.deleteMany({post: post._id});
+
+            res.json("Post deleted successfully!");
+        }
+        else {
+            throw new Error("You are not the creator of the post. You cannot delete this post")
+        }
     } catch (err) {
-        console.log(err);
+        return res.status(400).json({error: err.message});
     }
 }
 
