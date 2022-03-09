@@ -1,10 +1,9 @@
 import User from '../models/User.js';
-import router from '../routes/dashboard.js';
 
-//get ALL USERS, getfullName, getEmail, getUsername, getRole,
+
 export const getUsers = async (req, res, next) => {
     try {
-        const result = await User.find({});
+        const result = await User.find({}, { password: 0 });
         return res.status(200).json(result);
     } catch (error) {
         return res.status(400).json({ message: error.message });
