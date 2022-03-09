@@ -33,7 +33,8 @@ router.post('/register', async (req, res) => {
             username: username.toLowerCase(),
             email: email.toLowerCase(),
             password: encryptedPwd,
-            dateCreated: new Date().toISOString()
+            dateCreated: new Date().toISOString(),
+            role: 'user',
         });
 
         const token = jwt.sign(
@@ -124,7 +125,8 @@ router.get('/getLoggedUser', auth, async (req, res) => {
         email: user.email,
         followers: user.followers,
         following: user.following,
-        posts: posts
+        posts,
+        role: user.role,
     });
 });
 
@@ -133,19 +135,25 @@ router.get('/getByUsername', async (req, res) => {
         console.log("e1");
         const user = await User.findOne({username: req.query.username});
         const posts = await Post.find({creator: user._id});
-        
+        console.log(user);
 
         let newFollowers = [];
         let newFollowing = [];
 
         for (let i=0; i<user.followers.length; i++) {
-            const u = await User.findOne({_id: user.followers[i]})
-            newFollowers.push(u);
+            const u = await User.findOne({_id: user.followers[i]});
+
+            if (u) {
+                newFollowers.push(u);
+            }
         }
 
         for (let i=0; i<user.following.length; i++) {
-            const u = await User.findOne({_id: user.following[i]})
-            newFollowing.push(u);
+            const u = await User.findOne({_id: user.following[i]});
+            
+            if (u) {
+                newFollowing.push(u);
+            }
         }
 
         user.followers = newFollowers;
@@ -163,7 +171,7 @@ router.get('/getByUsername', async (req, res) => {
         });
     }
     catch(err) {
-        res.status(400).send("user not found");
+        res.status(400).send(err.message);
     }
 });
 

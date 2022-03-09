@@ -17,34 +17,28 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        select: false
+        required: true
     },
     dateCreated: {
         type: Date,
-        required: true,
-        select: false
+        required: true
     },
     token: {
-        type: String,
-        select: false
+        type: String
     },
     posts: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'Post',
-            select: false
+            type: mongoose.Schema.Types.ObjectId, ref: 'Post'
         }
     ],
     followers: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'User',
-            select: false
+            type: mongoose.Schema.Types.ObjectId, ref: 'User'
         }
     ],
     following: [
         {
-            type: mongoose.Schema.Types.ObjectId, ref: 'User',
-            select:false
+            type: mongoose.Schema.Types.ObjectId, ref: 'User'
         }
     ],
     role: {
