@@ -92,6 +92,9 @@
     <!-- Posts -->
       <div v-if="showPosts" class="mt-5">
             <div class='box' style='border-radius: 0px;' v-for="post in user.posts" v-bind:key="post._id">
+              <div class="" v-if="post.creator === $store.state.user._id">
+                          <button class="delete" @click.prevent="deletePost(post._id)"></button> Delete Post
+                      </div>
                   <div class="media-content">
                     <div class="content">
                       <p>
@@ -100,6 +103,7 @@
                           {{ post.content }}
                       </p>
                     </div>
+                    
                     <!-- Icons -->
                       <div class="level-left">
                           <span class="mr-1">{{ post.comments.length }}</span>
@@ -112,7 +116,8 @@
                           </a>
                       </div>
                     </div>
-            </div>
+                      
+              </div>
       </div>
 
     <!-- Followers -->
@@ -246,6 +251,17 @@ export default {
             console.log(err);
         }
         this.isFollowing = false
+    },
+    async deletePost(id) {
+            if (confirm("Are you sure u wanna delete this post ?")) {
+                await axios.delete(process.env.VUE_APP_API_URL + `/post/${id}`, {
+                    headers: {
+                        token: getCookie('token')
+                    }
+                })
+                this.$store.dispatch('getAllPosts')
+                this.getUser()
+            }
     },
     showThePosts(e) {
       e.preventDefault()
