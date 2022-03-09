@@ -1,8 +1,6 @@
 import Vue from 'vue';
-// import getCookie from "../cookies/getCookie.js"
 import isAuth from '../cookies/isAuth.js';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue'
 import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue';
 import store from '../store.js';
