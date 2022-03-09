@@ -1,86 +1,92 @@
 <template>
-    <div class="container mt-5">
-        <div>
-            <div class="tile is-ancestor mt-5">
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Kolona 1</p>
-                        <p class="subtitle">Kontenti</p>
-                        <div class="content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis
-                                feugiat facilisis.
-                            </p>
-                        </div>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Kolona 2</p>
-                        <p class="subtitle">Kontenti</p>
-                        <div class="content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis
-                                feugiat facilisis.
-                            </p>
-                        </div>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <p class="title">Kolona 3</p>
-                        <p class="subtitle">Kontenti</p>
-                        <div class="content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis
-                                feugiat facilisis.
-                            </p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-        <section class="hero is-primary mt-5">
+    <div>
+        <section class="hero is-medium ">
             <div class="hero-body">
-                <p class="title">Primary hero</p>
-                <p class="subtitle">Primary subtitle</p>
+                <div class="container has-text-centered">
+                    <div class="columns is-vcentered">
+                        <div class="column is-6">
+                            <figure class="image is-5by3">
+                                <img src="../components/photos/forum.jpeg">
+                            </figure>
+                        </div>
+                        <div class="column is-5 is-offset-1">
+                            <h1 class="title is-2">
+                                Forum App
+                            </h1>
+
+                            <div class="content">
+                            <h2 class="subtitle is-5">
+    A forum is an online discussion board where people can ask questions, share their experiences, and discuss topics of mutual interest. Forums are an excellent way to create social connections and a sense of community. They can also help you to cultivate an interest group about a particular subject
+                            </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <div class="placeholderi">
-            <div class="mesazhi is-size-2 mt-5">
-                <p><strong>Leave Us a Message</strong></p>
+        <section class="hero is-small is-light">
+        <div class="hero-body">
+            <h1 class="title is-2 has-text-centered">Meet our team</h1>
+            <br>
+            <div class="container has-text-centered">
+                <div class="columns is-hcentred">
+                    <div class="column is-2">
+                        <figure class="image is-256x256">
+                            <img class="is-rounded" src="../components/photos/Albion.jpeg">
+                        </figure>
+                        <br>
+                        <h1 class="title is-4">Albion Babaj</h1>
+                        <div class="content">
+                            <h3 class="subtitle is-6">
+                            Albion is gambler. <br> He's a camouflage illuminati, and likes Alfred Cako. 
+                            </h3>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="column is-2">
+                        <figure class="image is-256x256">
+                            <img class="is-rounded" src="../components/photos/Ermal.jpeg">
+                        </figure>
+                        <br>
+                        <h1 class="title is-4">Ermal Abiti</h1>
+                        
+                        <div class="content">
+                            <h3 class="subtitle is-6">
+                            Ermal is a hardworker. <br> Likes to play FIFA, and koçe with Eroll.
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    <div class="column is-2">
+                        <figure class="image is-256x256">
+                            <img class="is-rounded" src="../components/photos/Erolli.png">
+                        </figure>
+                        <br>
+                        <h1 class="title is-4">Eroll Uka</h1>
+                        <div class="content">
+                            <h3 class="subtitle is-6">
+                                Eroll is a song writer. <br> Likes drugs, especially LSD. He's always down!
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    <div class="column is-2">
+                        <figure class="image is-256x256">
+                            <img class="is-rounded" src="../components/photos/Leon.jpeg">
+                        </figure>
+                        <br>
+                        <h1 class="title is-4">Leon Berisha</h1>
+                        <div class="content">
+                            <h3 class="subtitle is-6">
+                                Leon is P9. <br> Drives crazy, the most handsome guy alive.   
+                            </h3>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <textarea class="textarea is-large" placeholder="Type..."></textarea>
+
         </div>
-        <div>
-            <button class="button is-danger">Submit</button>
-        </div>
-        <nav class="level">
-            <div class="level-item has-text-centered hero-body">
-                <div>
-                    <p class="heading">Tweets</p>
-                    <p class="title">3,456</p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">Following</p>
-                    <p class="title">123</p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">Followers</p>
-                    <p class="title">456K</p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">Likes</p>
-                    <p class="title">789</p>
-                </div>
-            </div>
-        </nav>
+        </section>
     </div>
 </template>
 
@@ -89,3 +95,4 @@ export default {
     name: 'About',
 };
 </script>
+
