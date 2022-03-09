@@ -35,22 +35,28 @@
           </p>
         </div>
       </div>
+      <div class="media-right" v-if="comment.creator._id === $store.state.user._id">
+        
+                <button class="delete" @click.prevent="deleteComment(comment._id)">s</button>
+            </div>
     </article>
   </div>
 </article>
 <br>
 <div class="media-content">
+          <form @submit.prevent="onSubmit">
           <div class="field">
             <p class="control">
-              <textarea class="textarea" placeholder="Komento..."></textarea>
+              <textarea class="textarea" placeholder="Reply to this post..." v-model="replyText"></textarea>
             </p>
           </div>
           <div class="field">
             <p class="control">
-              <button class="button">Posto komentin</button>
+              <button class="button" name="submitReplyBtn" :disabled="disabledReplyButton">Reply</button>
             </p>
           </div>
-        </div>
+        </form>
+</div>
 </div>
 
 <div v-else-if="loading">
@@ -64,12 +70,15 @@ Post not found...
 
 <script>
 import axios from "axios"
+import getCookie from "../../cookies/getCookie.js"
 
 export default {
   name: 'SinglePost',
   data() {
     return {
       post: {},
+      replyText: '',
+      disabledReplyButton: false,
       loading: false
     }
   },
@@ -86,6 +95,49 @@ export default {
       finally {
         this.loading = false;
       }
+    },
+    async deleteComment(id) {
+        try {
+          if (confirm("Are you sure you want to delete this comment ? ")) {
+            await axios.delete(process.env.VUE_APP_API_URL + '/comment?commentid=' + id,
+              {
+                headers: {
+                        'userid': getCookie('userid'),
+                        'token': getCookie('token'),
+                }
+              }
+            )
+            await this.getPost()
+          }
+          
+        } catch (error) {
+          alert(error.message);
+        }
+    },
+    async onSubmit() {
+      this.disabledReplyButton = true;
+      try {
+        
+        await axios.post(process.env.VUE_APP_API_URL + '/comment?postid=' + this.$route.query.postid,
+          {
+            content: this.replyText,
+          },
+          {
+            headers: {
+                  'userid': getCookie('userid'),
+                  'token': getCookie('token'),
+            }
+          }
+        )
+        await this.getPost()
+      } catch (error) {
+          console.log(error.message);
+      }
+      finally {
+        this.replyText = ''
+        this.disabledReplyButton = false;
+      }
+
     }
   },
   async mounted() {

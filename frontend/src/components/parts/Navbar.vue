@@ -56,6 +56,7 @@
           </a>
           <div class="navbar-dropdown is-boxed">
             <a class="navbar-item" v-bind:href="`/profile?username=${$store.state.user.username}`">{{ $store.state.user.fullName }}</a>
+            <a v-if="$store.state.user.role === 'admin'" class="navbar-item has-text-green" href="/dashboard">Dashboard</a>
             <hr class="navbar-divider">
             <a class="navbar-item has-text-danger" @click="logOut">Logout</a>
           </div>

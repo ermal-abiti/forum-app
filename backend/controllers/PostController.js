@@ -9,7 +9,6 @@ export async function getAllPosts (req, res) {
         for (let i =0; i<result.length; i++){
             result[i].creator = await User.findOne({_id: result[i].creator});
             result[i].comments = await Comment.find({post: ObjectId(result[i]._id)});
-            console.log(result[i].comments);
         }
 
         return res.status(200).json(result);
@@ -97,7 +96,9 @@ export async function getFollowingPosts (req, res) {
         
         for (let i = 0; i < posts.length; i++) {
             const creator = await User.findOne({_id: posts[i].creator});
+            const comments = await Comment.find({post: posts[i]._id});
             posts[i].creator = creator
+            posts[i].comments = posts[i].comments.concat(comments);
         }
 
         return res.status(200).json(posts);

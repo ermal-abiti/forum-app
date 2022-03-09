@@ -45,3 +45,23 @@ export const addComment = async (req, res, next) => {
         return res.status(400).json({ message: error.message });
     }
 }
+
+export const deleteComment = async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.user.user_id});
+        const comment = await Comment.findOne({_id: req.query.commentid });
+        if (!comment) {
+            throw new Error('Comment does not exist!');
+        }
+
+        if (comment.creator.toString() === user._id.toString()) {
+            comment.remove();
+            return res.json("Deleted successfully comment");
+        }
+        else {
+            throw new Error('You cannot delete that comment!')
+        }
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+}

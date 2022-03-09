@@ -18,11 +18,9 @@
                 </div>
                 <nav class="level is-mobile">
                 <div class="level-left">
+                    <span class="mr-1">{{ post.comments.length }}</span>
                     <a class="level-item" :href="`/singlepost?postid=${post._id}`">
                     <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                    </a>
-                    <a class="level-item">
-                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
                     </a>
                     <a class="level-item">
                     <span class="icon is-small"><i class="fas fa-heart"></i></span>

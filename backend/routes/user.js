@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import Comment from "../models/Comment.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import auth from "../middleware/auth.js";
@@ -134,8 +135,13 @@ router.get('/getByUsername', async (req, res) => {
     try {
         console.log("e1");
         const user = await User.findOne({username: req.query.username});
-        const posts = await Post.find({creator: user._id});
-        console.log(user);
+        let posts = await Post.find({creator: user._id});
+        
+        for (let i=0; i < posts.length; i++) {
+            const comment = await Comment.find({post: posts[i]._id});
+            posts[i].comments = posts[i].comments.concat(comment);
+        }
+        console.log(posts);
 
         let newFollowers = [];
         let newFollowing = [];

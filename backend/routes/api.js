@@ -10,7 +10,8 @@ import {
 } from "../controllers/PostController.js";
 import { 
     getAllComments,
-    addComment
+    addComment,
+    deleteComment
 } from "../controllers/CommentController.js";
 
 
@@ -27,5 +28,6 @@ router.get('/followingPosts', auth, getFollowingPosts);
 // Comment Routes
 router.get('/comments', getAllComments);
 router.post('/comment', auth, addComment);
+router.delete('/comment', auth, deleteComment);
 
 export default router;
