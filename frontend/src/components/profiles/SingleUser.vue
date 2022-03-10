@@ -1,6 +1,7 @@
 <template>
     <div v-if="user.username">
-        <div class="columns">
+        <div class="columns is-centered">
+        <div class="column is-10">
             <div class="container profile">
                 <!-- Profile section -->
                 <div class="section profile-heading">
@@ -140,6 +141,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 

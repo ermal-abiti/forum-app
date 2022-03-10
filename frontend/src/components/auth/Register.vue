@@ -1,8 +1,9 @@
 <template>
+<div class="hero-body">
     <div class="container mt-5">
         <div class="columns mt-5">
             <div class="card">
-                <div class="card-content title">
+                <div class="card-content">
                     <p class="title">Not a member ?</p>
                     <p class="subtitle">Join the largest community for discussions...</p>
                 </div>
@@ -55,6 +56,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="hero-body">
         <div class="columns is-centered">
             <div class="column is-9 ">
                 

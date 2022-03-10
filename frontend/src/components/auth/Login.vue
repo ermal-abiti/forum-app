@@ -1,11 +1,12 @@
 <template>
+<div class="hero-body">
     <div class="container mt-5">
         <article class="message is-danger" v-if="this.$route.query.invalid">
             <div class="message-body">Check username and password</div>
         </article>
         <div class="columns mt-5">
             <div class="card">
-                <div class="card-content title">
+                <div class="card-content ">
                     <p class="title">Already a member ?</p>
                     <p class="subtitle">Log In to continue...</p>
                 </div>
@@ -44,6 +45,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>

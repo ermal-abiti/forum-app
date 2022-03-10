@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div class="container mt-5" v-if="post.content">
         <article class="media">
             <figure class="media-left">
