@@ -1,17 +1,7 @@
-import { Router } from "express";
-import auth from "../middleware/auth.js";
-import {
-    getAllPosts,
-    getPostById,
-    updatePost,
-    addPost,
-    deletePost,
-    getFollowingPosts
-} from "../controllers/PostController.js";
-import { 
-    getAllComments,
-    addComment
-} from "../controllers/CommentController.js";
+import { Router } from 'express';
+import auth from '../middleware/auth.js';
+import { getAllPosts, getPostById, updatePost, addPost, deletePost, getFollowingPosts } from '../controllers/PostController.js';
+import { getAllComments, addComment, deleteComment } from '../controllers/CommentController.js';
 
 const router = Router();
 
@@ -20,11 +10,12 @@ router.get('/posts', getAllPosts);
 router.post('/addpost', auth, addPost);
 router.get('/post/', getPostById);
 router.put('/post/:postid', updatePost);
-router.delete('/post/:postid', deletePost);
+router.delete('/post/:postid', auth, deletePost);
 router.get('/followingPosts', auth, getFollowingPosts);
 
 // Comment Routes
 router.get('/comments', getAllComments);
 router.post('/comment', auth, addComment);
+router.delete('/comment', auth, deleteComment);
 
 export default router;

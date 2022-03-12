@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "code:format": "prettier --write \"./**/*.{ts,css,js,html,vue}\""
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -15,6 +16,7 @@
     "core-js": "^3.6.5",
     "dotenv-webpack": "^7.0.3",
     "node-localstorage": "^2.2.1",
+    "prettier": "^2.5.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.6.2"

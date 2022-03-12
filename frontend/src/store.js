@@ -1,91 +1,90 @@
-import axios from "axios";
-import Vue from "vue";
-import Vuex from "vuex"
-import isAuth from "./cookies/isAuth.js"
-import getCookie from "./cookies/getCookie.js"
+import axios from 'axios';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import isAuth from './cookies/isAuth.js';
+import getCookie from './cookies/getCookie.js';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const state = {
     loggedIn: false,
-    user: "",
+    user: '',
     posts: [],
     followingPosts: [],
-    token: ""
-}
+    token: '',
+};
 
 const getters = {
     aPo: (state) => {
-        return state.loggedIn ? "po" : "jo"
+        return state.loggedIn ? 'po' : 'jo';
     },
-}
+};
 
 const mutations = {
     async setToken(state) {
-        state.token = getCookie('token')
+        state.token = getCookie('token');
     },
-    authCheck (state) {
-        isAuth().then(res=>{
-            state.loggedIn = res
-        })
+    authCheck(state) {
+        isAuth().then((res) => {
+            state.loggedIn = res;
+        });
     },
     async userLoggedIn(state) {
         const result = await axios.get(process.env.VUE_APP_API_URL + '/users/getLoggedUser', {
-                headers: {
-                    token: getCookie('token')
-                }
-            })
-        state.user = result.data
-        state.token = getCookie('token')
-    
+            headers: {
+                token: getCookie('token'),
+            },
+        });
+        state.user = result.data;
+        state.token = getCookie('token');
     },
 
     async getAllPosts(state) {
-        state.posts = []
+        state.posts = [];
         const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', {
             headers: {
-                token: state.token
-            }
-        })
-        state.posts = result.data
+                token: state.token,
+            },
+        });
+        state.posts = result.data;
     },
 
     async getFollowingsPosts(state) {
-        state.followingPosts = []
+        state.followingPosts = [];
         const result = await axios.get(process.env.VUE_APP_API_URL + '/followingPosts', {
             headers: {
-                token: state.token
-            }
+                token: state.token,
+            },
         });
-        state.followingPosts = result.data
+        state.followingPosts = result.data;
     },
 
     async emptyFollowingPosts(state) {
-        state.followingPosts = []
+        state.followingPosts = [];
     },
 
-    userLogOut (state) {
-        state.loggedIn = false
+    userLogOut(state) {
+        state.loggedIn = false;
     },
 
-    userLogIn (state) {
-        state.loggedIn = true
-    }
-}
+    userLogIn(state) {
+        state.loggedIn = true;
+    },
+};
 
 const actions = {
-    setToken: ({commit})=> commit('setToken'),
-    authCheck: ({commit})=> commit('authCheck'),
-    userLogOut: ({commit})=> commit('userLogOut'),
-    userLogIn: ({commit})=> commit('userLogIn'),
-    userLoggedIn: ({commit})=> commit('userLoggedIn'),
-    getAllPosts: ({commit})=> commit('getAllPosts'),
-    getFollowingsPosts: ({commit})=> commit('getFollowingsPosts'),
-    emptyFollowingPosts: ({commit})=> commit('emptyFollowingPosts'),
-}
+    setToken: ({ commit }) => commit('setToken'),
+    authCheck: ({ commit }) => commit('authCheck'),
+    userLogOut: ({ commit }) => commit('userLogOut'),
+    userLogIn: ({ commit }) => commit('userLogIn'),
+    userLoggedIn: ({ commit }) => commit('userLoggedIn'),
+    getAllPosts: ({ commit }) => commit('getAllPosts'),
+    getFollowingsPosts: ({ commit }) => commit('getFollowingsPosts'),
+    emptyFollowingPosts: ({ commit }) => commit('emptyFollowingPosts'),
+};
 export default new Vuex.Store({
     state,
     getters,
     mutations,
-    actions
-})
+    actions,
+});
