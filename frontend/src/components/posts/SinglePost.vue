@@ -8,8 +8,11 @@
             </figure>
             <div class="media-content">
                 <div class="content">
-                    <p>
+                    <!-- <p> -->
                         <strong>{{ post.creator.fullName }}</strong>
+                        <div v-if="post.image_url">
+                                <ImageView :img_url="post.image_url" width="200"/>
+                        </div>
                         <br />
                         {{ post.content }}
                         <br />
@@ -17,7 +20,7 @@
                             ><a class="mr-2"><i class="fas fa-caret-up"></i> </a><a class="mr-2"><i class="fas fa-caret-down"></i></a><a><i class="fas fa-comment-dots"></i></a> ·
                             {{ post.dateCreated.split('T').join(' ').slice(0, 16) }}
                         </small>
-                    </p>
+                    <!-- </p> -->
                 </div>
 
                 <article class="media" v-for="comment in post.comments" v-bind:key="comment._id">
@@ -71,9 +74,13 @@
 <script>
 import axios from 'axios';
 import getCookie from '../../cookies/getCookie.js';
+import ImageView from '../parts/ImageView.vue';
 
 export default {
     name: 'SinglePost',
+    components: {
+        ImageView,
+    },
     data() {
         return {
             post: {},

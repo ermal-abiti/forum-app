@@ -14,15 +14,22 @@
 
                     <div class="media-content">
                         <div class="content">
-                            <p>
+                            <!-- <p> -->
                                 <strong>{{ post.creator.fullName }}</strong>
                                 <small
                                     ><a :href="`/profile?username=${post.creator.username}`">@{{ post.creator.username }}</a></small
                                 >
                                 <small>{{ post.dateCreated.slice(0, 10) }}</small>
                                 <br />
-                                {{ post.content }}
-                            </p>
+
+                                <div v-if="post.image_url">
+                                        <ImageView :img_url="post.image_url" width="200"/>
+                                </div>
+                                
+                                <span>{{ post.content }}</span>
+                                
+                            <!-- </p> -->
+
                         </div>
                         <nav class="level is-mobile">
                             <div class="level-left">
@@ -50,11 +57,13 @@
 import AddPost from './AddPost.vue';
 import getCookie from '../../cookies/getCookie.js';
 import axios from 'axios';
+import ImageView from '../parts/ImageView.vue';
 
 export default {
     name: 'Posts',
     components: {
         AddPost,
+        ImageView
     },
     mounted() {
         this.$store.dispatch('getAllPosts');

@@ -6,7 +6,6 @@
 
             <!--
 -->
-
             <!-- Textarea -->
             <div class="field">
                 <label class="label" for="content">Content</label>
@@ -14,6 +13,13 @@
                     <textarea v-model="content" class="textarea" id="content" placeholder="What's on your mind?" name="content"></textarea>
                 </div>
             </div>
+
+            <!-- <div class="field">
+                <label class="label" for="image">Image</label>
+                <div class="control"> -->
+                    <input type="file" name="image" accept="image/png">
+                <!-- </div>
+            </div> -->
 
             <!-- Button -->
             <div class="field">
@@ -36,25 +42,33 @@ export default {
         return {
             title: '',
             content: '',
+            image: '',
         };
     },
     methods: {
         async addPost(e) {
             e.preventDefault();
-            let data = {
-                title: e.target.title.value,
-                content: e.target.content.value,
-            };
+            // let data = {
+            //     content: e.target.content.value,
+            // };
+            let data = new FormData();
+            data.append('content', e.target.content.value);
+            data.append('image', e.target.image.files[0]);
+            // data.append('image', e.target.image.files[0],  e.target.image.files[0].name);
+            console.log(e.target);
+            console.log(e.target.image.value);
+            console.log(e.target.image.files[0])
+            
             axios
                 .post(process.env.VUE_APP_API_URL + '/addpost', data, {
                     headers: {
                         userid: getCookie('userid'),
                         token: getCookie('token'),
+                        'Content-Type' : 'multipart/form-data',
                     },
                 })
                 .then((res) => {
                     console.log(res);
-                    this.title = '';
                     this.content = '';
                     this.$store.dispatch('getAllPosts');
                 });

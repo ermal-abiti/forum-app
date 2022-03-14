@@ -40,7 +40,6 @@ export async function addPost(req, res) {
     const data = req.body;
 
     data.dateCreated = new Date().toISOString();
-    const userId = req.cookies['userid'] || req.headers['userid'];
 
     data.creator = await User.findOne({ _id: userId });
 

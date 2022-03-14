@@ -10,15 +10,18 @@
 
             <div class="media-content">
                 <div class="content">
-                    <p>
+                    <!-- <p> -->
                         <strong>{{ post.creator.fullName }}</strong>
                         <small
                             ><a :href="`/profile?username=${post.creator.username}`">@{{ post.creator.username }}</a></small
                         >
                         <small>{{ post.dateCreated.slice(0, 10) }}</small>
                         <br />
+                        <div v-if="post.image_url">
+                                <ImageView :img_url="post.image_url" width="200"/>
+                        </div>
                         {{ post.content }}
-                    </p>
+                    <!-- </p> -->
                 </div>
                 <nav class="level is-mobile">
                     <div class="level-left">
@@ -45,9 +48,13 @@
 <script>
 import axios from 'axios';
 import getCookie from '../cookies/getCookie.js';
+import ImageView from '../components/parts/ImageView.vue';
+
 export default {
     name: 'Home',
-    components: {},
+    components: {
+        ImageView
+    },
     methods: {
         async deletePost(id) {
             if (confirm('Are you sure u wanna delete this post ?')) {
