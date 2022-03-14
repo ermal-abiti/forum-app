@@ -41,7 +41,13 @@ export async function addPost(req, res) {
 
     data.dateCreated = new Date().toISOString();
 
-    data.creator = await User.findOne({ _id: userId });
+    data.creator = await User.findOne({ _id: req.user.user_id });
+    
+    data.image_url = null;
+    
+    if(req.file) {
+        data.image_url = req.file.filename;
+    }
 
     const newPost = new Post(data);
 
