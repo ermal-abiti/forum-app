@@ -1,6 +1,5 @@
 import User from '../models/User.js';
 
-
 export const getUsers = async (req, res, next) => {
     try {
         const result = await User.find({}, { password: 0 });

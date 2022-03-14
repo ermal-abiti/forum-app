@@ -42,10 +42,10 @@ export async function addPost(req, res) {
     data.dateCreated = new Date().toISOString();
 
     data.creator = await User.findOne({ _id: req.user.user_id });
-    
+
     data.image_url = null;
-    
-    if(req.file) {
+
+    if (req.file) {
         data.image_url = req.file.filename;
     }
 
@@ -75,7 +75,7 @@ export async function updatePost(req, res) {
         if ('image_url' in req.body) {
             throw new Error('Payload must not contain image_url !');
         }
-        
+
         const updateResult = await Post.updateOne({ _id: ObjectId(req.params.postid) }, req.body);
         console.log(updateResult);
         return res.send('Post updated successfully!');

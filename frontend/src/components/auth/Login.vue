@@ -1,51 +1,51 @@
 <template>
-<div class="hero-body">
-    <div class="container mt-5">
-        <article class="message is-danger" v-if="this.$route.query.invalid">
-            <div class="message-body">Check username and password</div>
-        </article>
-        <div class="columns mt-5">
-            <div class="card">
-                <div class="card-content ">
-                    <p class="title">Already a member ?</p>
-                    <p class="subtitle">Log In to continue...</p>
-                </div>
-                <div class="card-content">
-                    <form class="form-horizontal" @submit="loginMethod">
-                        <fieldset>
-                            <!-- Form Name -->
-                            <legend></legend>
+    <div class="hero-body">
+        <div class="container mt-5">
+            <article class="message is-danger" v-if="this.$route.query.invalid">
+                <div class="message-body">Check username and password</div>
+            </article>
+            <div class="columns mt-5">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">Already a member ?</p>
+                        <p class="subtitle">Log In to continue...</p>
+                    </div>
+                    <div class="card-content">
+                        <form class="form-horizontal" @submit="loginMethod">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend></legend>
 
-                            <!-- Text input-->
-                            <div class="field">
-                                <label class="label" for="username">Username</label>
-                                <div class="control">
-                                    <input v-model="username" id="username" name="username" type="text" placeholder="Username" class="input" required="" />
+                                <!-- Text input-->
+                                <div class="field">
+                                    <label class="label" for="username">Username</label>
+                                    <div class="control">
+                                        <input v-model="username" id="username" name="username" type="text" placeholder="Username" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Password input-->
-                            <div class="field">
-                                <label class="label" for="password">Password</label>
-                                <div class="control">
-                                    <input v-model="password" id="password" name="password" type="password" placeholder="Password" class="input" required="" />
+                                <!-- Password input-->
+                                <div class="field">
+                                    <label class="label" for="password">Password</label>
+                                    <div class="control">
+                                        <input v-model="password" id="password" name="password" type="password" placeholder="Password" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Button -->
-                            <div class="field mt-5">
-                                <label class="label" for="loginbtn"></label>
-                                <div class="control">
-                                    <button id="loginbtn" name="loginbtn" class="button is-fullwidth is-outlined is-success">Login</button>
+                                <!-- Button -->
+                                <div class="field mt-5">
+                                    <label class="label" for="loginbtn"></label>
+                                    <div class="control">
+                                        <button id="loginbtn" name="loginbtn" class="button is-fullwidth is-outlined is-success">Login</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>

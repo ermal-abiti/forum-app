@@ -17,8 +17,8 @@
             <!-- <div class="field">
                 <label class="label" for="image">Image</label>
                 <div class="control"> -->
-                    <input type="file" name="image" accept="image/png">
-                <!-- </div>
+            <input type="file" name="image" accept="image/png" />
+            <!-- </div>
             </div> -->
 
             <!-- Button -->
@@ -57,14 +57,14 @@ export default {
             // data.append('image', e.target.image.files[0],  e.target.image.files[0].name);
             console.log(e.target);
             console.log(e.target.image.value);
-            console.log(e.target.image.files[0])
-            
+            console.log(e.target.image.files[0]);
+
             axios
                 .post(process.env.VUE_APP_API_URL + '/addpost', data, {
                     headers: {
-                        userid: getCookie('userid'),
-                        token: getCookie('token'),
-                        'Content-Type' : 'multipart/form-data',
+                        'userid': getCookie('userid'),
+                        'token': getCookie('token'),
+                        'Content-Type': 'multipart/form-data',
                     },
                 })
                 .then((res) => {

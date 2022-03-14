@@ -1,5 +1,5 @@
-<template> 
-    <div class="container mt-5" v-if="post.content">
+<template>
+    <div class="hero-body mt-5" v-if="post.content">
         <article class="media">
             <figure class="media-left">
                 <p class="image is-64x64">
@@ -9,17 +9,17 @@
             <div class="media-content">
                 <div class="content">
                     <!-- <p> -->
-                        <strong>{{ post.creator.fullName }}</strong>
-                        <div v-if="post.image_url">
-                                <ImageView :img_url="post.image_url" width="200"/>
-                        </div>
-                        <br />
-                        {{ post.content }}
-                        <br />
-                        <small
-                            ><a class="mr-2"><i class="fas fa-caret-up"></i> </a><a class="mr-2"><i class="fas fa-caret-down"></i></a><a><i class="fas fa-comment-dots"></i></a> ·
-                            {{ post.dateCreated.split('T').join(' ').slice(0, 16) }}
-                        </small>
+                    <strong>{{ post.creator.fullName }}</strong>
+                    <div v-if="post.image_url">
+                        <ImageView :img_url="post.image_url" width="200" />
+                    </div>
+                    <br />
+                    {{ post.content }}
+                    <br />
+                    <small
+                        ><a class="mr-2"><i class="fas fa-caret-up"></i> </a><a class="mr-2"><i class="fas fa-caret-down"></i></a><a><i class="fas fa-comment-dots"></i></a> ·
+                        {{ post.dateCreated.split('T').join(' ').slice(0, 16) }}
+                    </small>
                     <!-- </p> -->
                 </div>
 

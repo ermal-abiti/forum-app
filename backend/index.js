@@ -15,7 +15,6 @@ app.use(cookieParser());
 
 app.use(cors());
 
-
 // Api Endpoints
 app.use('/api', apiRoutes);
 

@@ -1,75 +1,75 @@
 <template>
     <div v-if="user.username">
         <div class="columns is-centered">
-        <div class="column is-10">
-            <div class="container profile">
-                <!-- Profile section -->
-                <div class="section profile-heading">
-                    <div class="columns is-mobile is-multiline">
-                        <!-- Profile content -->
-                        <div class="column is-2">
-                            <span class="header-icon user-profile-image">
-                                <img class="imgprofile" src="./default-avatar.png" />
-                            </span>
-                        </div>
-                        <!-- Name and Bio -->
-                        <div class="column is-4-tablet is-10-mobile name">
-                            <p>
-                                <span class="title is-bold">{{ user.fullName }}</span>
-                            </p>
-                            <p class="tagline">@{{ user.username }}</p>
-                            <div v-if="!(this.$store.state.user.username == user.username) && this.$store.state.loggedIn">
-                                <button @click="unFollowUser" class="button is-info mt-5" v-if="isFollowing">following</button>
-                                <button @click="followUser" class="button is-outlined is-info mt-5" v-else>follow</button>
+            <div class="column is-10">
+                <div class="container profile">
+                    <!-- Profile section -->
+                    <div class="section profile-heading">
+                        <div class="columns is-mobile is-multiline">
+                            <!-- Profile content -->
+                            <div class="column is-2">
+                                <span class="header-icon user-profile-image">
+                                    <img class="imgprofile" src="./default-avatar.png" />
+                                </span>
+                            </div>
+                            <!-- Name and Bio -->
+                            <div class="column is-4-tablet is-10-mobile name">
+                                <p>
+                                    <span class="title is-bold">{{ user.fullName }}</span>
+                                </p>
+                                <p class="tagline">@{{ user.username }}</p>
+                                <div v-if="!(this.$store.state.user.username == user.username) && this.$store.state.loggedIn">
+                                    <button @click="unFollowUser" class="button is-info mt-5" v-if="isFollowing">following</button>
+                                    <button @click="followUser" class="button is-outlined is-info mt-5" v-else>follow</button>
+                                </div>
+                            </div>
+                            <!-- Profile Data -->
+                            <div class="column is-2-tablet is-4-mobile has-text-centered">
+                                <p class="stat-val">{{ user.followers.length }}</p>
+                                <p class="stat-key">Followers</p>
+                            </div>
+                            <div class="column is-2-tablet is-4-mobile has-text-centered">
+                                <p class="stat-val">{{ user.following.length }}</p>
+                                <p class="stat-key">Following</p>
+                            </div>
+                            <div class="column is-2-tablet is-4-mobile has-text-centered">
+                                <p class="stat-val">{{ user.posts.length }}</p>
+                                <p class="stat-key">Posts</p>
                             </div>
                         </div>
-                        <!-- Profile Data -->
-                        <div class="column is-2-tablet is-4-mobile has-text-centered">
-                            <p class="stat-val">{{ user.followers.length }}</p>
-                            <p class="stat-key">Followers</p>
-                        </div>
-                        <div class="column is-2-tablet is-4-mobile has-text-centered">
-                            <p class="stat-val">{{ user.following.length }}</p>
-                            <p class="stat-key">Following</p>
-                        </div>
-                        <div class="column is-2-tablet is-4-mobile has-text-centered">
-                            <p class="stat-val">{{ user.posts.length }}</p>
-                            <p class="stat-key">Posts</p>
-                        </div>
                     </div>
-                </div>
-                <!-- Interactions data -->
-                <div class="profile-options is-fullwidth">
-                    <div class="tabs is-fullwidth is-medium">
-                        <ul>
-                            <li class="link">
-                                <a @click="showThePosts">
-                                    <span class="icon">
-                                        <i class="fa fa-list"></i>
-                                    </span>
-                                    <span>Posts</span>
-                                </a>
-                            </li>
+                    <!-- Interactions data -->
+                    <div class="profile-options is-fullwidth">
+                        <div class="tabs is-fullwidth is-medium">
+                            <ul>
+                                <li class="link">
+                                    <a @click="showThePosts">
+                                        <span class="icon">
+                                            <i class="fa fa-list"></i>
+                                        </span>
+                                        <span>Posts</span>
+                                    </a>
+                                </li>
 
-                            <li class="link">
-                                <a @click="showTheFollowers">
-                                    <span class="icon">
-                                        <i class="fa fa-users"></i>
-                                    </span>
-                                    <span>Followers</span>
-                                </a>
-                            </li>
+                                <li class="link">
+                                    <a @click="showTheFollowers">
+                                        <span class="icon">
+                                            <i class="fa fa-users"></i>
+                                        </span>
+                                        <span>Followers</span>
+                                    </a>
+                                </li>
 
-                            <li class="link">
-                                <a @click="showTheFollowing">
-                                    <span class="icon">
-                                        <i class="fa fa-users"></i>
-                                    </span>
-                                    <span>Following</span>
-                                </a>
-                            </li>
+                                <li class="link">
+                                    <a @click="showTheFollowing">
+                                        <span class="icon">
+                                            <i class="fa fa-users"></i>
+                                        </span>
+                                        <span>Following</span>
+                                    </a>
+                                </li>
 
-                            <!-- <li class="link">
+                                <!-- <li class="link">
                                 <a @click="showTheLikes">
                                     <span class="icon">
                                         <i class="fa fa-thumbs-up"></i>
@@ -77,74 +77,74 @@
                                     <span>Likes</span>
                                 </a>
                             </li> -->
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Posts -->
-                <div v-if="showPosts" class="mt-5">
-                    <div class="box" style="border-radius: 0px" v-for="post in user.posts" v-bind:key="post._id">
-                        <div class="" v-if="post.creator === $store.state.user._id"><button class="delete" @click.prevent="deletePost(post._id)"></button> Delete Post</div>
-                        <div class="media-content">
-                            <div class="content">
-                                <!-- <p> -->
+                    <!-- Posts -->
+                    <div v-if="showPosts" class="mt-5">
+                        <div class="box" style="border-radius: 0px" v-for="post in user.posts" v-bind:key="post._id">
+                            <div class="" v-if="post.creator === $store.state.user._id"><button class="delete" @click.prevent="deletePost(post._id)"></button> Delete Post</div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <!-- <p> -->
                                     <strong>{{ user.fullName }}</strong> <small>@{{ user.username }}</small> <small>{{ post.dateCreated }}</small>
                                     <br />
                                     <div v-if="post.image_url">
-                                        <ImageView :img_url="post.image_url" width="200"/>
+                                        <ImageView :img_url="post.image_url" width="200" />
                                     </div>
                                     {{ post.content }}
-                                <!-- </p> -->
-                            </div>
+                                    <!-- </p> -->
+                                </div>
 
-                            <!-- Icons -->
-                            <div class="level-left">
-                                <span class="mr-1">{{ post.comments.length }}</span>
-                                <a class="level-item" :href="`/singlepost?postid=${post._id}`">
-                                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                                </a>
+                                <!-- Icons -->
+                                <div class="level-left">
+                                    <span class="mr-1">{{ post.comments.length }}</span>
+                                    <a class="level-item" :href="`/singlepost?postid=${post._id}`">
+                                        <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                    </a>
 
-                                <a class="level-item">
-                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                                </a>
+                                    <a class="level-item">
+                                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Followers -->
-                <div v-if="showFollowers" class="mt-5">
-                    <div class="container">
-                        <div class="box" v-for="user in user.followers" :key="user._id">
-                            <p>
-                                <a :href="`/profile?username=${user.username}`" class="has-text-black"
-                                    ><b>{{ user.fullName }}</b></a
-                                >
-                            </p>
-                            <p>
-                                <a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a>
-                            </p>
+                    <!-- Followers -->
+                    <div v-if="showFollowers" class="mt-5">
+                        <div class="container">
+                            <div class="box" v-for="user in user.followers" :key="user._id">
+                                <p>
+                                    <a :href="`/profile?username=${user.username}`" class="has-text-black"
+                                        ><b>{{ user.fullName }}</b></a
+                                    >
+                                </p>
+                                <p>
+                                    <a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Followers -->
-                <div v-if="showFollowing" class="mt-5">
-                    <div class="container">
-                        <div class="box" v-for="user in user.following" :key="user._id">
-                            <p>
-                                <a :href="`/profile?username=${user.username}`" class="has-text-black"
-                                    ><b>{{ user.fullName }}</b></a
-                                >
-                            </p>
-                            <p>
-                                <a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a>
-                            </p>
+                    <!-- Followers -->
+                    <div v-if="showFollowing" class="mt-5">
+                        <div class="container">
+                            <div class="box" v-for="user in user.following" :key="user._id">
+                                <p>
+                                    <a :href="`/profile?username=${user.username}`" class="has-text-black"
+                                        ><b>{{ user.fullName }}</b></a
+                                    >
+                                </p>
+                                <p>
+                                    <a :href="`/profile?username=${user.username}`" class="has-text-info">@{{ user.username }}</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 
@@ -160,7 +160,7 @@
 <script>
 import axios from 'axios';
 import getCookie from '../../cookies/getCookie';
-import ImageView from '../parts/ImageView.vue'
+import ImageView from '../parts/ImageView.vue';
 
 export default {
     name: 'SingleUser',

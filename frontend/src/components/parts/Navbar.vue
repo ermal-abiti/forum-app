@@ -31,7 +31,7 @@
                     <div v-if="!$store.state.loggedIn"></div>
                     <div class="navbar-item field" v-else>
                         <p class="control has-icons-right">
-                            <input class="input" type="search" placeholder="Search..." />
+                            <input v-model="searchText" class="input" type="search" placeholder="Search..." @keyup.enter="onSearch" />
                             <span class="icon is-small is-right">
                                 <i class="fas fa-search"></i>
                             </span>
@@ -78,6 +78,7 @@ export default {
     data() {
         return {
             activator: false,
+            searchText: '',
         };
     },
     methods: {
@@ -95,6 +96,10 @@ export default {
         makeBurger() {
             this.activator = !this.activator;
             return this.activator;
+        },
+        onSearch() {
+            this.$router.push({ path: `/search?text=${this.searchText}` });
+            console.log(this.searchText);
         },
     },
 };

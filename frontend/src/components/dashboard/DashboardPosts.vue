@@ -44,26 +44,24 @@ export default {
     props: ['titleD'],
     data() {
         return {
-            posts:[]
-        }
+            posts: [],
+        };
     },
     methods: {
         async getAllPosts() {
             this.posts = [];
             const result = await axios.get(process.env.VUE_APP_API_URL + '/posts', {
-            headers: {
-                token: getCookie('token'),
-            },
-            })
-            this.posts = result.data
-        }
+                headers: {
+                    token: getCookie('token'),
+                },
+            });
+            this.posts = result.data;
+        },
     },
     mounted() {
         this.getAllPosts();
-    }
-}
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

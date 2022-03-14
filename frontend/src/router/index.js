@@ -3,20 +3,21 @@ import isAuth from '../cookies/isAuth.js';
 import VueRouter from 'vue-router';
 import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue';
-import store from '../store.js';
+// import store from '../store.js';
 import Posts from '../components/posts/Posts.vue';
 import UserProfiles from '../components/profiles/UserProfiles.vue';
 import SinglePost from '../components/posts/SinglePost.vue';
 import Dashboard from '../components/dashboard/Dashboard.vue';
+import Search from '../components/search/Search.vue';
 
 import SingleUser from '../components/profiles/SingleUser.vue';
 
 Vue.use(VueRouter);
 
-function loginTest(to, from, next) {
-    if (to.name !== 'Login' && !store.state.loggedIn) next({ name: 'Login' });
-    else next();
-}
+// function loginTest(to, from, next) {
+//     if (to.name !== 'Login' && !store.state.loggedIn) next({ name: 'Login' });
+//     else next();
+// }
 
 const routes = [
     {
@@ -27,9 +28,9 @@ const routes = [
     {
         path: '/about',
         name: 'About',
-        beforeEnter(to, from, next) {
-            loginTest(to, from, next);
-        },
+        // beforeEnter(to, from, next) {
+        //     loginTest(to, from, next);
+        // },
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -85,6 +86,11 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
+    },
+    {
+        path: '/search',
+        name: 'Search',
+        component: Search,
     },
 ];
 

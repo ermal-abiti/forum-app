@@ -46,26 +46,24 @@ export default {
     props: ['titleD'],
     data() {
         return {
-            users:[]
-        }
+            users: [],
+        };
     },
     methods: {
         async getAllUsers() {
             this.users = [];
             const result = await axios.get(process.env.VUE_APP_API_URL + '/dashboard/users', {
-            headers: {
-                token: getCookie('token'),
-            },
-            })
-            this.users = result.data
-        }
+                headers: {
+                    token: getCookie('token'),
+                },
+            });
+            this.users = result.data;
+        },
     },
     mounted() {
         this.getAllUsers();
-    }
-}
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

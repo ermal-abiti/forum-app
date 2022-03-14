@@ -4,8 +4,8 @@
             <div class="modal-background"></div>
             <div class="modal-card">
                 <header class="modal-card-head">
-                <p class="modal-card-title">Modal title</p>
-                <button class="delete" aria-label="close" @click.prevent="showFormModal('close')"></button>
+                    <p class="modal-card-title">Modal title</p>
+                    <button class="delete" aria-label="close" @click.prevent="showFormModal('close')"></button>
                 </header>
                 <section class="modal-card-body">
                     <div class="field">
@@ -16,17 +16,15 @@
                     </div>
                 </section>
                 <footer class="modal-card-foot">
-                <button class="button is-success" @click.prevent="updatePost(postIdUpdate)">Save changes</button>
-                <button class="button" @click.prevent="showFormModal('close')">Cancel</button>
+                    <button class="button is-success" @click.prevent="updatePost(postIdUpdate)">Save changes</button>
+                    <button class="button" @click.prevent="showFormModal('close')">Cancel</button>
                 </footer>
             </div>
         </div>
         <div class="columns is-centered">
-            <div class="column is-9 ">
-                
+            <div class="column is-9">
                 <add-post v-if="this.$store.state.loggedIn" />
                 <article class="media mt-5" v-for="post in this.$store.state.posts" v-bind:key="post._id">
-                    
                     <figure class="media-left">
                         <p class="image is-64x64">
                             <img src="../profiles/default-avatar.png" />
@@ -36,21 +34,20 @@
                     <div class="media-content">
                         <div class="content">
                             <!-- <p> -->
-                                <strong>{{ post.creator.fullName }}</strong>
-                                <small
-                                    ><a :href="`/profile?username=${post.creator.username}`">@{{ post.creator.username }}</a></small
-                                >
-                                <small>{{ post.dateCreated.slice(0, 10) }}</small>
-                                <br />
+                            <strong>{{ post.creator.fullName }}</strong>
+                            <small
+                                ><a :href="`/profile?username=${post.creator.username}`">@{{ post.creator.username }}</a></small
+                            >
+                            <small>{{ post.dateCreated.slice(0, 10) }}</small>
+                            <br />
 
-                                <div v-if="post.image_url">
-                                        <ImageView :img_url="post.image_url" width="200"/>
-                                </div>
-                                
-                                <span>{{ post.content }}</span>
-                                
+                            <div v-if="post.image_url">
+                                <ImageView :img_url="post.image_url" width="200" />
+                            </div>
+
+                            <span>{{ post.content }}</span>
+
                             <!-- </p> -->
-
                         </div>
                         <nav class="level is-mobile">
                             <div class="level-left">
@@ -61,11 +58,10 @@
                                 <a class="level-item">
                                     <span class="icon is-small"><i class="fas fa-heart"></i></span>
                                 </a>
-                                
                             </div>
                         </nav>
                     </div>
-                    
+
                     <div class="media-right" v-if="post.creator.username === $store.state.user.username">
                         <button class="button is-white" @click.prevent="showFormModal('show', post.content, post._id)">
                             <span class="icon is-small"><i class="fa-solid fa-pencil"></i></span>
@@ -93,11 +89,11 @@ export default {
             modalActive: false,
             contentUpdate: '',
             postIdUpdate: '',
-        }
+        };
     },
     components: {
         AddPost,
-        ImageView
+        ImageView,
     },
     mounted() {
         this.$store.dispatch('getAllPosts');
@@ -116,7 +112,7 @@ export default {
         async updatePost(id) {
             let data = {
                 content: this.contentUpdate,
-            }
+            };
 
             axios
                 .put(process.env.VUE_APP_API_URL + '/post/' + id, data, {
@@ -131,24 +127,20 @@ export default {
                     this.$store.dispatch('getAllPosts');
                     this.modalActive = false;
                 });
-
         },
-        async showFormModal(modalState, content=null, id=null) {
+        async showFormModal(modalState, content = null, id = null) {
             if (modalState === 'close') {
-                this.modalActive = false
-                this.contentUpdate = ''
-                this.postIdUpdate = ''
+                this.modalActive = false;
+                this.contentUpdate = '';
+                this.postIdUpdate = '';
+            } else if (modalState === 'show') {
+                this.modalActive = true;
+                this.contentUpdate = content;
+                this.postIdUpdate = id;
             }
-            else if (modalState === 'show') {
-                this.modalActive = true
-                this.contentUpdate = content
-                this.postIdUpdate = id
-            }
-        }
+        },
     },
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

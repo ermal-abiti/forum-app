@@ -1,7 +1,6 @@
 <template>
     <div v-if="this.$store.state.user.role === 'admin'">
         <div id="app">
-
             <section class="main-content columns is-fullheight">
                 <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
                     <p class="menu-label is-hidden-touch">Navigation</p>
@@ -18,8 +17,8 @@
                 </aside>
 
                 <div class="container column is-10">
-                    <DashboardUsers titleD="All Users" v-if="showPage == 'users'"/>
-                    <DashboardPosts titleD="All Posts" v-if="showPage == 'posts'"/>
+                    <DashboardUsers titleD="All Users" v-if="showPage == 'users'" />
+                    <DashboardPosts titleD="All Posts" v-if="showPage == 'posts'" />
                 </div>
             </section>
         </div>
@@ -33,18 +32,18 @@
 </template>
 
 <script>
-import DashboardUsers from './DashboardUsers.vue'
-import DashboardPosts from './DashboardPosts.vue'
+import DashboardUsers from './DashboardUsers.vue';
+import DashboardPosts from './DashboardPosts.vue';
 export default {
     name: 'dashboard',
     components: {
         DashboardUsers,
-        DashboardPosts
+        DashboardPosts,
     },
     data() {
         return {
             users: [],
-            showPage:'users',
+            showPage: 'users',
         };
     },
     methods: {
@@ -57,8 +56,8 @@ export default {
             }
         },
         showPageChange(page) {
-            this.showPage = page
-        }
+            this.showPage = page;
+        },
     },
     async mounted() {
         this.users = [];

@@ -1,62 +1,62 @@
 <template>
-<div class="hero-body">
-    <div class="container mt-5">
-        <div class="columns mt-5">
-            <div class="card">
-                <div class="card-content">
-                    <p class="title">Not a member ?</p>
-                    <p class="subtitle">Join the largest community for discussions...</p>
-                </div>
-                <div class="card-content">
-                    <form class="form-horizontal" @submit="loginMethod">
-                        <fieldset>
-                            <!-- Form Name -->
-                            <legend></legend>
+    <div class="hero-body">
+        <div class="container mt-5">
+            <div class="columns mt-5">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">Not a member ?</p>
+                        <p class="subtitle">Join the largest community for discussions...</p>
+                    </div>
+                    <div class="card-content">
+                        <form class="form-horizontal" @submit="loginMethod">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend></legend>
 
-                            <!-- Text input-->
-                            <div class="field">
-                                <label class="label" for="username">Username</label>
-                                <div class="control">
-                                    <input id="username" name="username" type="text" placeholder="Username" class="input" required="" />
+                                <!-- Text input-->
+                                <div class="field">
+                                    <label class="label" for="username">Username</label>
+                                    <div class="control">
+                                        <input id="username" name="username" type="text" placeholder="Username" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="field">
-                                <label class="label" for="username">Full Name</label>
-                                <div class="control">
-                                    <input id="fullName" name="fullName" type="text" placeholder="Full Name" class="input" required="" />
+                                <div class="field">
+                                    <label class="label" for="username">Full Name</label>
+                                    <div class="control">
+                                        <input id="fullName" name="fullName" type="text" placeholder="Full Name" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="field">
-                                <label class="label" for="username">Email</label>
-                                <div class="control">
-                                    <input id="email" name="email" type="text" placeholder="Email" class="input" required="" />
+                                <div class="field">
+                                    <label class="label" for="username">Email</label>
+                                    <div class="control">
+                                        <input id="email" name="email" type="text" placeholder="Email" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Password input-->
-                            <div class="field">
-                                <label class="label" for="password">Password</label>
-                                <div class="control">
-                                    <input id="password" name="password" type="password" placeholder="Password" class="input" required="" />
+                                <!-- Password input-->
+                                <div class="field">
+                                    <label class="label" for="password">Password</label>
+                                    <div class="control">
+                                        <input id="password" name="password" type="password" placeholder="Password" class="input" required="" />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Button -->
-                            <div class="field mt-5">
-                                <label class="label" for="registerbtn"></label>
-                                <div class="control">
-                                    <button id="registerbtn" name="registerbtn" class="button is-fullwidth is-outlined is-success">Register</button>
+                                <!-- Button -->
+                                <div class="field mt-5">
+                                    <label class="label" for="registerbtn"></label>
+                                    <div class="control">
+                                        <button id="registerbtn" name="registerbtn" class="button is-fullwidth is-outlined is-success">Register</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
