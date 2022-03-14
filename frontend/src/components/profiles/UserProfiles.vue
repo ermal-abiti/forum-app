@@ -28,10 +28,6 @@
                             <p class="stat-val">{{ $store.state.user.following.length }}</p>
                             <p class="stat-key">Following</p>
                         </div>
-                        <div class="column is-2-tablet is-4-mobile has-text-centered">
-                            <p class="stat-val">5</p>
-                            <p class="stat-key">Likes</p>
-                        </div>
                     </div>
                 </div>
                 <!-- Interactions data -->

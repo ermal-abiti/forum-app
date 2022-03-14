@@ -33,8 +33,8 @@
                             <p class="stat-key">Following</p>
                         </div>
                         <div class="column is-2-tablet is-4-mobile has-text-centered">
-                            <p class="stat-val">5</p>
-                            <p class="stat-key">Likes</p>
+                            <p class="stat-val">{{ user.posts.length }}</p>
+                            <p class="stat-key">Posts</p>
                         </div>
                     </div>
                 </div>
@@ -69,14 +69,14 @@
                                 </a>
                             </li>
 
-                            <li class="link">
+                            <!-- <li class="link">
                                 <a @click="showTheLikes">
                                     <span class="icon">
                                         <i class="fa fa-thumbs-up"></i>
                                     </span>
                                     <span>Likes</span>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>

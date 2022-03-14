@@ -1,5 +1,26 @@
 <template>
     <div class="hero-body">
+        <div :class="modalActive ? 'modal is-active' : 'modal'">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete" aria-label="close" @click.prevent="showFormModal('close')"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label" for="content">Content</label>
+                        <div class="control">
+                            <textarea v-model="contentUpdate" class="textarea" id="content" placeholder="What's on your mind?" name="content"></textarea>
+                        </div>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                <button class="button is-success" @click.prevent="updatePost(postIdUpdate)">Save changes</button>
+                <button class="button" @click.prevent="showFormModal('close')">Cancel</button>
+                </footer>
+            </div>
+        </div>
         <div class="columns is-centered">
             <div class="column is-9 ">
                 
@@ -40,12 +61,18 @@
                                 <a class="level-item">
                                     <span class="icon is-small"><i class="fas fa-heart"></i></span>
                                 </a>
+                                
                             </div>
                         </nav>
                     </div>
                     
                     <div class="media-right" v-if="post.creator.username === $store.state.user.username">
-                        <button class="delete" @click.prevent="deletePost(post._id)">s</button>
+                        <button class="button is-white" @click.prevent="showFormModal('show', post.content, post._id)">
+                            <span class="icon is-small"><i class="fa-solid fa-pencil"></i></span>
+                        </button>
+                        <button class="button is-white" @click.prevent="deletePost(post._id)">
+                            <span class="icon is-small"><i class="fa-solid fa-trash"></i></span>
+                        </button>
                     </div>
                 </article>
             </div>
@@ -61,6 +88,13 @@ import ImageView from '../parts/ImageView.vue';
 
 export default {
     name: 'Posts',
+    data() {
+        return {
+            modalActive: false,
+            contentUpdate: '',
+            postIdUpdate: '',
+        }
+    },
     components: {
         AddPost,
         ImageView
@@ -79,6 +113,38 @@ export default {
                 this.$store.dispatch('getAllPosts');
             }
         },
+        async updatePost(id) {
+            let data = {
+                content: this.contentUpdate,
+            }
+
+            axios
+                .put(process.env.VUE_APP_API_URL + '/post/' + id, data, {
+                    headers: {
+                        userid: getCookie('userid'),
+                        token: getCookie('token'),
+                    },
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.contentUpdate = '';
+                    this.$store.dispatch('getAllPosts');
+                    this.modalActive = false;
+                });
+
+        },
+        async showFormModal(modalState, content=null, id=null) {
+            if (modalState === 'close') {
+                this.modalActive = false
+                this.contentUpdate = ''
+                this.postIdUpdate = ''
+            }
+            else if (modalState === 'show') {
+                this.modalActive = true
+                this.contentUpdate = content
+                this.postIdUpdate = id
+            }
+        }
     },
 };
 </script>

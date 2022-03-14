@@ -28,7 +28,7 @@ router.get('/fetchImage/:file(*)', (req, res) => {
 router.get('/posts', getAllPosts);
 router.post('/addpost', auth, upload.single('image'), addPost);
 router.get('/post/', getPostById);
-router.put('/post/:postid', updatePost);
+router.put('/post/:postid', auth, updatePost);
 router.delete('/post/:postid', auth, deletePost);
 router.get('/followingPosts', auth, getFollowingPosts);
 

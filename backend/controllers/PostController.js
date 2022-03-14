@@ -62,11 +62,25 @@ export async function addPost(req, res) {
 
 export async function updatePost(req, res) {
     try {
+        const post = await Post.findById(req.params.postid);
+
+        if (!post) {
+            throw new Error('Post does not exist! Cant update!');
+        }
+
+        if (req.user.user_id != post.creator) {
+            throw new Error('You have not privileges to update this post!');
+        }
+
+        if ('image_url' in req.body) {
+            throw new Error('Payload must not contain image_url !');
+        }
+        
         const updateResult = await Post.updateOne({ _id: ObjectId(req.params.postid) }, req.body);
         console.log(updateResult);
         return res.send('Post updated successfully!');
     } catch (err) {
-        console.log(err);
+        res.json({ error: err.message });
     }
 }
 
