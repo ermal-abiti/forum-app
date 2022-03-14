@@ -87,11 +87,14 @@
                         <div class="" v-if="post.creator === $store.state.user._id"><button class="delete" @click.prevent="deletePost(post._id)"></button> Delete Post</div>
                         <div class="media-content">
                             <div class="content">
-                                <p>
+                                <!-- <p> -->
                                     <strong>{{ user.fullName }}</strong> <small>@{{ user.username }}</small> <small>{{ post.dateCreated }}</small>
                                     <br />
+                                    <div v-if="post.image_url">
+                                        <ImageView :img_url="post.image_url" width="200"/>
+                                    </div>
                                     {{ post.content }}
-                                </p>
+                                <!-- </p> -->
                             </div>
 
                             <!-- Icons -->
@@ -157,10 +160,13 @@
 <script>
 import axios from 'axios';
 import getCookie from '../../cookies/getCookie';
-// import getCookie from '../../cookies/getCookie.js'
+import ImageView from '../parts/ImageView.vue'
 
 export default {
     name: 'SingleUser',
+    components: {
+        ImageView,
+    },
     data() {
         return {
             user: {},

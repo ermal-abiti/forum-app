@@ -129,15 +129,13 @@ router.get('/getLoggedUser', auth, async (req, res) => {
 
 router.get('/getByUsername', async (req, res) => {
     try {
-        console.log('e1');
         const user = await User.findOne({ username: req.query.username });
-        let posts = await Post.find({ creator: user._id });
+        let posts = await Post.find({ creator: user._id }).sort({ dateCreated: -1 });
 
         for (let i = 0; i < posts.length; i++) {
             const comment = await Comment.find({ post: posts[i]._id });
             posts[i].comments = posts[i].comments.concat(comment);
         }
-        console.log(posts);
 
         let newFollowers = [];
         let newFollowing = [];
@@ -228,7 +226,5 @@ router.post('/unfollow', auth, async (req, res) => {
     }
     return res.send('You cannot unfollow yourself!');
 });
-
-router.get('/');
 
 export default router;
