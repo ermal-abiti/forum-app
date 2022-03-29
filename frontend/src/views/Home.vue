@@ -40,7 +40,7 @@
             </div>
         </article>
     </div>
-    <div class="container mt-5" v-else>
+    <div class="hero-body mt-5" v-else>
         <h1 class="title is-1">Featured</h1>
 
         <article class="media mt-5" v-for="post in __posts" v-bind:key="post._id">
